@@ -1,109 +1,98 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talentum Selección</title>
-
-
-    <!-- =========================
-         CSS PRINCIPAL
-    ========================== -->
-
-    <link
-        rel="stylesheet"
-        href="css/styles.css"
-    >
-
-
-    <!-- =========================
-         FONT AWESOME - ICONOS
-    ========================== -->
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
-
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-
-
 <body>
 
 
-    <!-- =========================
-         NAVBAR
-    ========================== -->
 
-    <header class="header">
+ <!-- =========================
+     NAVBAR
+========================== -->
 
-        <nav class="navbar">
+<header class="header">
 
-
-            <!-- LOGO -->
-
-            <a href="#inicio" class="logo">
-
-                <img
-                    src="assets/logos/logo talentum.png"
-                    alt="Talentum"
-                >
-
-            </a>
+    <nav class="navbar">
 
 
-            <!-- MENÚ -->
+        <!-- LOGO -->
 
-            <ul class="nav-menu">
+        <a href="#inicio" class="logo">
 
-                <li>
-                    <a class="active" href="#inicio">
-                        Inicio
-                    </a>
-                </li>
+            <img
+                src="assets/logos/logo talentum.png"
+                alt="Talentum"
+            >
 
-                <li>
-                    <a href="#nosotros">
-                        Nosotros
-                    </a>
-                </li>
+        </a>
 
-                <li>
-                    <a href="#servicios">
-                        Servicios
-                    </a>
-                </li>
 
-                <li>
-                    <a href="#proceso">
-                        Proceso
-                    </a>
-                </li>
+        <!-- BOTÓN HAMBURGUESA RESPONSIVE -->
+        <!-- En PC estará oculto -->
+        <!-- En tablet/celular aparecerá -->
 
-                <li>
-                    <a href="#empresas">
-                        Empresas
-                    </a>
-                </li>
+        <button
+            class="menu-toggle"
+            id="menu-toggle"
+            type="button"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+            aria-controls="nav-menu"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
-                <li>
-                    <a href="#contacto">
-                        Contacto
-                    </a>
-                </li>
 
-            </ul>
+        <!-- MENÚ -->
 
-        </nav>
+        <ul class="nav-menu" id="nav-menu">
 
-    </header>
+            <li>
+                <a class="active" href="#inicio">
+                    Inicio
+                </a>
+            </li>
+
+            <li>
+                <a href="#nosotros">
+                    Nosotros
+                </a>
+            </li>
+
+            <li>
+                <a href="#servicios">
+                    Servicios
+                </a>
+            </li>
+
+            <li>
+                <a href="#proceso">
+                    Proceso
+                </a>
+            </li>
+
+            <li>
+                <a href="#empresas">
+                    Empresas
+                </a>
+            </li>
+
+            <li>
+                <a href="#contacto">
+                    Contacto
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
 
 
 
@@ -912,6 +901,318 @@
 
 
         </section>
+
+        <!--Sección - Nuestro Proceso-->
+        <section class="proceso" id="proceso">
+            <span class="section-tag">NUESTRO PROCESO</span>
+            <h1 class="section-title">
+                Un proceso claro, eficiente y <span>centrado en las personas.</span>
+            </h1>
+
+            <div class="stepper">
+                <div class="stepper-line"></div>
+
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <span class="step-label">Requerimiento</span>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <span class="step-label">Atracción</span>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fa-regular fa-file-lines"></i>
+                    </div>
+                    <span class="step-label">Selección</span>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">
+                        <i class="fa-regular fa-handshake"></i>
+                    </div>
+                    <span class="step-label">Incorporación</span>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-icon">
+                        <i class="fa-solid fa-chart-column"></i>
+                    </div>
+                    <span class="step-label">Seguimiento</span>
+                </div>
+            </div>
+        </section>
+
+        <!--Sección - Desafíos de mercado-->
+        <section class="desafios" id="desafios">
+            <div class="desafios-content">
+                <span class="section-tag">DESAFÍOS DEL MERCADO</span>
+                <h2 class="section-title">
+                  ¿Cuáles son los problemas<br>
+                  <span>frecuentes de nuestros clientes?</span>
+                </h2>
+                <h2 class="desafios-desc">
+                    Conocemos los desafíos que enfrentan las empresas al momento<br>de encontrar, seleccionar y desarrollar talento.
+                </h2>
+
+                <div class="problems-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <i class="fa-solid fa-people-group"></i>
+                        </div>
+                        <div class="problem-info">
+                            <h3>Alta rotación</h3>
+                            <p>Dificultad para retener</p>
+                        </div>
+                    </div>
+
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <i class="fa-regular fa-clock"></i>
+                        </div>
+                        <div class="problem-info">
+                            <h3>Procesos lentos</h3>
+                            <p>Tiempos de selección</p>
+                        </div>
+                    </div>
+
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <i class="fa-regular fa-file-code"></i>
+                        </div>
+                        <div class="problem-info">
+                            <h3>Perfiles no compatibles</h3>
+                            <p>Candidatos no alineados</p>
+                        </div>
+                    </div>
+
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <i class="fa-solid fa-gear"></i>
+                        </div>
+                        <div class="problem-info">
+                            <h3>Sobrecarga operativa</h3>
+                            <p>Equipos saturados</p>
+                        </div>
+                    </div>
+
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <i class="fa-solid fa-diagram-project"></i>
+                        </div>
+                        <div class="problem-info">
+                            <h3>Procesos poco estandarizados</h3>
+                            <p>Falta de metodología</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="desafios-image">
+                <img src="assets/images/edificio.jpg" alt="Convertimos desafíos en oportunidades">
+                <div class="desafios-banner-text">
+                    <h3>Convertimos desafíos en oportunidades de crecimiento.</h3>
+                    <div class="banner-line"></div>
+                </div>
+            </div>
+        </section>
+
+        <!--Sección - Empresas asociadas-->
+        <section class="empresas" id="empresas">
+            <span class="section-tag">EMPRESAS QUE CONFÍAN EN NOSOTROS</span>
+            <h2 class="section-title center">
+                Conoce algunas de nuestras empresas asociadas
+            </h2>
+            <div class="carousel-wrapper">
+                <button class="carousel-arrow left" id="prevBtn" aria-label="Anterior">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <div class="carousel-container">
+                    <div class="carousel-track" id="carouselTrack">
+                        <div class="carousel-slide"><img src="assets/logos/carrusel-imagen1.png" alt="BCP"></div>
+                        <div class="carousel-slide"><img src="assets/logos/carrusel-imagen2.png" alt="Pentafon"></div>
+                        <div class="carousel-slide"><img src="assets/logos/carrusel-imagen3.png" alt="Puerto Norte"></div>
+                        <div class="carousel-slide"><img src="assets/logos/carrusel-imagen4.png" alt="Interbank"></div>
+                        <div class="carousel-slide"><img src="assets/logos/carrusel-imagen5.png" alt="Alicorp"></div>
+                        <div class="carousel-slide"><img src="assets/logos/carrusel-imagen6.png" alt="Metro"></div>
+                    </div>
+                </div>
+                <button class="carousel-arrow right" id="nextBtn" aria-label="Siguiente">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!--Sección - Testimonios-->
+        <section class="testimonios">
+            <h2 class="section-title left">Lo que dicen nuestros clientes</h2>
+
+            <div class="testimonios-grid">
+                <article class="testimonio-card">
+                    <p class="quote">"Nos ayudaron a encontrar perfiles clave en tiempo récord."</p>
+                    <div class="testimonial-author">
+                        <img src="assets/images/maria-torres.jpg" alt="María Torres">
+                        <div>
+                            <strong>María Torres</strong>
+                            <p>Gerente de Talento Humano</p>
+                            <span>Grupo Empresarial Andino</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="testimonio-card">
+                    <p class="quote">"Un proceso profesional, ágil y centrado en nuestras necesidades."</p>
+                    <div class="testimonial-author">
+                        <img src="assets/images/luis-ramirez.jpg" alt="Luis Ramírez">
+                        <div>
+                            <strong>Luis Ramírez</strong>
+                            <p>Director de Operaciones</p>
+                            <span>InnovaTech</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!--Formularios-->
+        <section class="formularios-section" id="candidatos">
+            <h2 class="section-title center main-contact-title">
+                Conversemos sobre el talento que tu empresa necesita para crecer
+            </h2>
+
+            <div class="forms-grid">
+                <!-- FORMULARIO 1: PARA EMPRESAS -->
+                <div class="form-card card-empresas">
+                    <span class="card-tag tag-teal">PARA EMPRESAS</span>
+                    <h3 class="card-title">¿Buscas talento para tu empresa?</h3>
+                    <p class="card-subtitle">Déjanos tus datos y te contactaremos.</p>
+
+                    <form class="custom-form" onsubmit="return false;">
+                        <div class="form-row">
+                            <input type="text" placeholder="RUC de la empresa" readonly>
+                            <input type="text" placeholder="Nombre de la empresa" readonly>
+                        </div>
+                        <div class="form-row">
+                            <input type="text" placeholder="Nombre de contacto" readonly>
+                            <input type="text" placeholder="Cargo" readonly>
+                        </div>
+                        <div class="form-row full-width">
+                            <input type="email" placeholder="Correo corporativo" readonly>
+                        </div>
+                        <div class="form-row full-width">
+                            <input type="tel" placeholder="Teléfono corporativo" readonly>
+                        </div>
+                        <div class="form-row full-width">
+                            <input type="text" placeholder="¿En qué está interesado?" readonly>
+                        </div>
+                        <button type="button" class="form-btn btn-dark-blue">
+                            Solicitar información &rarr;
+                        </button>
+                    </form>
+                </div>
+
+                <!-- FORMULARIO 2: PARA CANDIDATOS -->
+                <div class="form-card card-candidatos">
+                    <span class="card-tag tag-purple">PARA CANDIDATOS</span>
+                    <h3 class="card-title">¿Buscas dar tu siguiente paso?</h3>
+                    <p class="card-subtitle">Regístrate en nuestra bolsa de trabajo.</p>
+
+                    <form class="custom-form" onsubmit="return false;">
+                        <div class="form-row flex-70-30">
+                            <input type="text" placeholder="Nombre completo" readonly>
+                            <input type="text" placeholder="DNI" readonly>
+                        </div>
+                        <div class="form-row full-width">
+                            <input type="text" placeholder="Modalidad de trabajo" readonly>
+                        </div>
+                        <div class="form-row full-width">
+                            <input type="tel" placeholder="Teléfono" readonly>
+                        </div>
+                        <div class="form-row full-width">
+                            <input type="email" placeholder="Correo electrónico" readonly>
+                        </div>
+                        <div class="form-row flex-equal">
+                            <div class="select-wrapper">
+                                <input type="text" placeholder="Área de interes" readonly>
+                                <i class="fa-solid fa-chevron-down select-icon"></i>
+                            </div>
+                            <div class="file-wrapper">
+                                <span class="file-placeholder">Cargar CV</span>
+                                <i class="fa-solid fa-upload upload-icon"></i>
+                            </div>
+                        </div>
+                        <button type="button" class="form-btn btn-purple">
+                            Enviar mi CV &rarr;
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!--Footer-->
+        <footer class="footer" id="contacto">
+        <div class="footer-container">
+            <!-- Columna 1: Logo y descripción -->
+            <div class="footer-col footer-about">
+                <a href="#inicio" class="footer-logo">
+                    <img src="assets/logos/logo talentum.png" alt="Talentum">
+                </a>
+                <p>
+                    Compañía consultora de reclutamiento y selección. Especializada en conectar talento con oportunidades para generar impacto real.
+                </p>
+            </div>
+
+            <!-- Columna 2: Explorar -->
+            <div class="footer-col">
+                <h3>Explorar</h3>
+                <ul class="footer-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#proceso">Proceso</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Servicios -->
+            <div class="footer-col">
+                <h3>Servicios</h3>
+                <ul class="footer-links">
+                    <li><a href="#servicios">Reclutamiento y selección</a></li>
+                    <li><a href="#servicios">Capacitación y desarrollo</a></li>
+                    <li><a href="#servicios">Evaluación por competencias</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 4: Contacto -->
+            <div class="footer-col">
+                <h3>Contacto</h3>
+                <ul class="footer-contact">
+                    <li>(511) 950 290 491</li>
+                    <li><a href="mailto:seleccion@talentumperu.com">seleccion@talentumperu.com</a></li>
+                    <li>Lima, Perú</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Barra inferior -->
+        <div class="footer-bottom">
+            <p>© 2024 Talentum. Todos los derechos reservados.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Política de privacidad</a> | <a href="#">Términos y condiciones</a>
+            </div>
+        </div>
+    </footer>
 
 
     </main>
