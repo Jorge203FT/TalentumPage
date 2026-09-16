@@ -1,0 +1,2439 @@
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    color: #0b2f67;
+    background: #ffffff;
+
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.header {
+    width: 100%;
+    background: #ffffff;
+}
+
+.navbar {
+    width: 100%;
+    min-height: 80px;
+
+    padding: 0 clamp(25px, 6vw, 120px);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    display: block;
+}
+
+.logo img {
+    width: 145px;
+    height: auto;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+
+    gap: clamp(20px, 2.5vw, 40px);
+
+    list-style: none;
+}
+
+.nav-menu a {
+    position: relative;
+
+    color: #0b2f67;
+
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: #6548f4;
+}
+
+.nav-menu a.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: -12px;
+
+    height: 3px;
+
+    background: #6548f4;
+
+    border-radius: 10px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    width: 100%;
+    min-height: 520px;
+
+    display: grid;
+
+    /* Texto izquierda / imagen derecha */
+    grid-template-columns: 47% 53%;
+
+    background: #0b3270;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   CONTENIDO HERO
+========================= */
+
+.hero-content {
+    position: relative;
+
+    /*
+       IMPORTANTE:
+       El contenido está por encima
+       y tiene fondo azul sólido.
+       El degradado NO tapa las letras.
+    */
+
+    z-index: 5;
+
+    min-width: 0;
+
+    padding:
+        clamp(50px, 6vw, 100px)
+        clamp(30px, 6vw, 120px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: #0b3270;
+}
+
+
+/* =========================
+   TITULO HERO
+========================= */
+
+.hero h1 {
+    position: relative;
+
+    z-index: 6;
+
+    max-width: 700px;
+
+    color: #ffffff;
+
+    font-size: clamp(36px, 3.5vw, 60px);
+
+    line-height: 1.05;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: #13c5c4;
+}
+
+
+/* =========================
+   DESCRIPCIÓN HERO
+========================= */
+
+.hero p {
+    position: relative;
+
+    z-index: 6;
+
+    max-width: 620px;
+
+    color: #ffffff;
+
+    font-size: clamp(14px, 1.1vw, 18px);
+
+    line-height: 1.6;
+
+    opacity: 0.9;
+}
+
+
+/* =========================
+   BOTONES HERO
+========================= */
+
+.hero-buttons {
+    position: relative;
+
+    z-index: 6;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 18px;
+
+    margin-top: 30px;
+}
+
+.btn {
+    min-width: 170px;
+
+    padding: 15px 25px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+    text-align: center;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+
+/* BOTÓN EMPRESAS */
+
+.btn-primary {
+    color: #ffffff;
+
+    background: #7047ef;
+}
+
+.btn-primary:hover {
+    background: #6037e4;
+}
+
+
+/* BOTÓN CANDIDATOS */
+
+.btn-outline {
+    color: #ffffff;
+
+    border: 2px solid #ffffff;
+
+    background: transparent;
+}
+
+.btn-outline:hover {
+    color: #0b3270;
+
+    background: #ffffff;
+}
+
+
+/* =========================
+   IMAGEN HERO
+========================= */
+
+.hero-image {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    min-height: 520px;
+
+    overflow: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    /*
+       Puedes cambiar center por:
+       55% center
+       60% center
+       etc. si quieres mover la foto.
+    */
+
+    object-position: center center;
+
+    display: block;
+}
+
+
+/* ==========================================
+   DIFUMINADO ENTRE AZUL E IMAGEN
+========================================== */
+
+.hero-image::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    /*
+       Empieza EXACTAMENTE donde
+       comienza la fotografía.
+    */
+
+    left: 0;
+
+    /*
+       El degradado ocupa solamente
+       una parte de la fotografía.
+    */
+
+    width: 38%;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background: linear-gradient(
+        to right,
+
+        #0b3270 0%,
+
+        rgba(11, 50, 112, 0.98) 8%,
+
+        rgba(11, 50, 112, 0.90) 20%,
+
+        rgba(11, 50, 112, 0.70) 38%,
+
+        rgba(11, 50, 112, 0.45) 56%,
+
+        rgba(11, 50, 112, 0.22) 72%,
+
+        rgba(11, 50, 112, 0.08) 86%,
+
+        rgba(11, 50, 112, 0) 100%
+    );
+}
+
+
+/* =========================
+   MÉTRICAS
+========================= */
+
+.metrics {
+    width: 100%;
+
+    padding:
+        40px
+        clamp(40px, 6vw, 120px);
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    align-items: center;
+
+    gap: clamp(30px, 4vw, 70px);
+
+    background: #ffffff;
+}
+
+
+/* =========================
+   CADA MÉTRICA
+========================= */
+
+.metric {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    min-width: 0;
+}
+
+
+/* =========================
+   ICONOS DE LAS MÉTRICAS
+========================= */
+
+.metric-icon {
+    width: 65px;
+    min-width: 65px;
+
+    height: 65px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #0bbbbb;
+
+    font-size: 48px;
+
+    line-height: 1;
+}
+
+
+/*
+   Los <i> de Font Awesome
+   ocuparán correctamente
+   el espacio del icono.
+*/
+
+.metric-icon i {
+    display: block;
+
+    color: #0bbbbb;
+
+    font-size: inherit;
+
+    line-height: 1;
+}
+
+
+/* =========================
+   INFORMACIÓN DE MÉTRICA
+========================= */
+
+.metric-info {
+    min-width: 0;
+}
+
+
+/* NÚMERO */
+
+.metric-info strong,
+.metric strong {
+    display: block;
+
+    color: #0b2f67;
+
+    font-size: clamp(23px, 2vw, 30px);
+
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+
+/* TEXTO */
+
+.metric-info p,
+.metric p {
+    margin-top: 5px;
+
+    color: #63799b;
+
+    font-size: 14px;
+
+    line-height: 1.2;
+}
+
+
+/* ==================================================
+   ¿POR QUÉ ELEGIR TALENTUM?
+   NUEVA SECCIÓN
+================================================== */
+
+.why-talentum {
+    width: 100%;
+
+    padding:
+        55px
+        clamp(40px, 6vw, 120px)
+        65px;
+
+    background: #ffffff;
+}
+
+
+/* =========================
+   CABECERA DE LA SECCIÓN
+========================= */
+
+.why-header {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 50px;
+
+    margin-bottom: 28px;
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+.why-title {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.why-label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #00a9ad;
+
+    /* AUMENTADO */
+    font-size: 16px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+.why-title h2 {
+    color: #0b2f67;
+
+    /* AUMENTADO */
+    font-size: clamp(38px, 3vw, 52px);
+
+    font-weight: 700;
+
+    line-height: 1.05;
+}
+
+.why-title h2 span {
+    color: #6548f4;
+}
+
+
+/* =========================
+   DESCRIPCIÓN DERECHA
+========================= */
+
+.why-description {
+    width: 100%;
+
+    /* Un poco más de espacio para el texto grande */
+    max-width: 520px;
+
+    padding-bottom: 5px;
+}
+
+.why-description p {
+    color: #63799b;
+
+    /* AUMENTADO */
+    font-size: 19px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   CONTENEDOR DE TARJETAS
+========================= */
+
+.why-cards {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 12px;
+}
+
+
+/* =========================
+   TARJETA
+========================= */
+
+.why-card {
+    width: 100%;
+
+    /* Aumentamos un poco para las letras grandes */
+    min-height: 165px;
+
+    padding: 22px 18px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 15px;
+
+    border-radius: 12px;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* EFECTO AL PASAR EL MOUSE */
+
+.why-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 12px 28px
+        rgba(11, 47, 103, 0.10);
+}
+
+
+/* =========================
+   COLORES DE LAS TARJETAS
+========================= */
+
+.why-card-purple {
+    background: #f1edff;
+}
+
+.why-card-blue {
+    background: #eef7ff;
+}
+
+.why-card-green {
+    background: #eaf9f6;
+}
+
+.why-card-pink {
+    background: #fff0f3;
+}
+
+
+/* =========================
+   ICONOS DE LAS TARJETAS
+========================= */
+
+.why-icon {
+    width: 55px;
+    min-width: 55px;
+
+    height: 55px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #526f9c;
+}
+
+
+/*
+   Los SVG que colocamos directamente
+   en el HTML tomarán este color.
+*/
+
+.why-icon svg {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    color: #526f9c;
+}
+
+
+/* =========================
+   TEXTO DE LAS TARJETAS
+========================= */
+
+.why-card-content {
+    min-width: 0;
+
+    padding-top: 2px;
+}
+
+.why-card-content h3 {
+    margin-bottom: 10px;
+
+    color: #0b2f67;
+
+    /* AUMENTADO */
+    font-size: 21px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+.why-card-content p {
+    color: #7184a1;
+
+    /* AUMENTADO */
+    font-size: 17px;
+
+    line-height: 1.4;
+}
+
+
+/* ==========================================
+   PANTALLAS GRANDES
+   1440px EN ADELANTE
+========================================== */
+
+@media (min-width: 1440px) {
+
+    .hero {
+        min-height: 540px;
+
+        grid-template-columns: 46% 54%;
+    }
+
+    .hero-image {
+        min-height: 540px;
+    }
+
+    .hero h1 {
+        font-size: clamp(48px, 3.2vw, 64px);
+    }
+
+    /*
+       En pantallas grandes hacemos
+       la transición un poco más amplia.
+    */
+
+    .hero-image::before {
+        width: 40%;
+    }
+
+
+    /* MÉTRICAS */
+
+    .metrics {
+        padding-left: clamp(70px, 7vw, 140px);
+        padding-right: clamp(70px, 7vw, 140px);
+    }
+
+    .metric-icon {
+        width: 70px;
+        min-width: 70px;
+
+        font-size: 52px;
+    }
+
+
+    /* ¿POR QUÉ ELEGIR TALENTUM? */
+
+    .why-talentum {
+        padding-left: clamp(70px, 7vw, 140px);
+        padding-right: clamp(70px, 7vw, 140px);
+    }
+
+    .why-card {
+        min-height: 175px;
+    }
+
+    .why-icon {
+        width: 60px;
+        min-width: 60px;
+
+        height: 60px;
+    }
+
+    .why-label {
+        font-size: 16px;
+    }
+
+    .why-title h2 {
+        font-size: 52px;
+    }
+
+    .why-description p {
+        font-size: 19px;
+    }
+
+    .why-card-content h3 {
+        font-size: 22px;
+    }
+
+    .why-card-content p {
+        font-size: 17px;
+    }
+}
+
+
+/* ==========================================
+   LAPTOP
+========================================== */
+
+@media (max-width: 1200px) {
+
+    .navbar {
+        padding-left: 45px;
+        padding-right: 45px;
+    }
+
+    .hero {
+        grid-template-columns: 48% 52%;
+    }
+
+    .hero-content {
+        padding: 55px 45px;
+    }
+
+    .hero h1 {
+        font-size: clamp(36px, 4vw, 50px);
+    }
+
+    .hero-image::before {
+        width: 35%;
+    }
+
+
+    /* MÉTRICAS */
+
+    .metrics {
+        padding-left: 45px;
+        padding-right: 45px;
+
+        gap: 30px;
+    }
+
+    .metric {
+        gap: 15px;
+    }
+
+    .metric-icon {
+        width: 55px;
+        min-width: 55px;
+
+        height: 55px;
+
+        font-size: 43px;
+    }
+
+
+    /* ¿POR QUÉ ELEGIR TALENTUM? */
+
+    .why-talentum {
+        padding-left: 45px;
+        padding-right: 45px;
+    }
+
+    .why-header {
+        gap: 35px;
+    }
+
+    .why-card {
+        min-height: 160px;
+
+        padding: 20px 15px;
+
+        gap: 11px;
+    }
+
+    .why-icon {
+        width: 48px;
+        min-width: 48px;
+
+        height: 48px;
+    }
+
+    .why-label {
+        font-size: 15px;
+    }
+
+    .why-title h2 {
+        font-size: 40px;
+    }
+
+    .why-description p {
+        font-size: 17px;
+    }
+
+    .why-card-content h3 {
+        font-size: 19px;
+    }
+
+    .why-card-content p {
+        font-size: 16px;
+    }
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 0 30px;
+    }
+
+    /*
+       Por ahora ocultamos el menú.
+       Luego podemos poner hamburguesa.
+    */
+
+    .nav-menu {
+        display: none;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        grid-template-columns: 1fr;
+
+        min-height: auto;
+    }
+
+    .hero-content {
+        padding: 60px 40px;
+    }
+
+    .hero h1 {
+        max-width: 650px;
+
+        font-size: 46px;
+    }
+
+    .hero p {
+        max-width: 600px;
+    }
+
+    .hero-image {
+        width: 100%;
+
+        height: 430px;
+
+        min-height: 430px;
+    }
+
+    .hero-image img {
+        object-position: center center;
+    }
+
+    /*
+       Como la imagen ahora está debajo
+       del texto, quitamos el degradado
+       lateral.
+    */
+
+    .hero-image::before {
+        display: none;
+    }
+
+
+    /* MÉTRICAS */
+
+    .metrics {
+        grid-template-columns: repeat(2, 1fr);
+
+        padding: 40px;
+
+        gap: 35px;
+    }
+
+    .metric {
+        gap: 16px;
+    }
+
+    .metric-icon {
+        width: 60px;
+        min-width: 60px;
+
+        height: 60px;
+
+        font-size: 45px;
+    }
+
+
+    /* ¿POR QUÉ ELEGIR TALENTUM? */
+
+    .why-talentum {
+        padding: 50px 40px;
+    }
+
+    .why-header {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 20px;
+
+        margin-bottom: 28px;
+    }
+
+    .why-description {
+        max-width: 600px;
+    }
+
+    .why-cards {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 15px;
+    }
+
+    .why-card {
+        min-height: 160px;
+
+        padding: 22px 20px;
+    }
+
+    .why-icon {
+        width: 55px;
+        min-width: 55px;
+
+        height: 55px;
+    }
+
+    .why-label {
+        font-size: 14px;
+    }
+
+    .why-title h2 {
+        font-size: 38px;
+    }
+
+    .why-description p {
+        font-size: 17px;
+    }
+
+    .why-card-content h3 {
+        font-size: 20px;
+    }
+
+    .why-card-content p {
+        font-size: 16px;
+    }
+}
+
+
+/* ==========================================
+   CELULAR
+========================================== */
+
+@media (max-width: 550px) {
+
+    /* NAVBAR */
+
+    .navbar {
+        min-height: 65px;
+
+        padding: 0 20px;
+    }
+
+    .logo img {
+        width: 120px;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        width: 100%;
+
+        min-height: auto;
+
+        grid-template-columns: 1fr;
+    }
+
+    .hero-content {
+        padding: 45px 22px;
+    }
+
+    .hero h1 {
+        font-size: 37px;
+
+        line-height: 1.08;
+
+        margin-bottom: 20px;
+    }
+
+    .hero p {
+        font-size: 14px;
+
+        line-height: 1.6;
+    }
+
+    .hero-buttons {
+        width: 100%;
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        margin-top: 25px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .hero-image {
+        width: 100%;
+
+        height: 300px;
+
+        min-height: 300px;
+    }
+
+    .hero-image img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        object-position: center;
+    }
+
+    .hero-image::before {
+        display: none;
+    }
+
+
+    /* MÉTRICAS */
+
+    .metrics {
+        grid-template-columns: 1fr;
+
+        padding: 35px 25px;
+
+        gap: 30px;
+    }
+
+    .metric {
+        width: 100%;
+
+        gap: 18px;
+    }
+
+    .metric-icon {
+        width: 58px;
+        min-width: 58px;
+
+        height: 58px;
+
+        font-size: 42px;
+    }
+
+    .metric-info strong,
+    .metric strong {
+        font-size: 26px;
+    }
+
+    .metric-info p,
+    .metric p {
+        font-size: 14px;
+    }
+
+
+    /* ¿POR QUÉ ELEGIR TALENTUM? */
+
+    .why-talentum {
+        padding: 45px 22px;
+    }
+
+    .why-header {
+        margin-bottom: 25px;
+    }
+
+    .why-label {
+        font-size: 13px;
+    }
+
+    .why-title h2 {
+        font-size: 34px;
+
+        line-height: 1.08;
+    }
+
+    .why-description p {
+        font-size: 16px;
+    }
+
+    .why-cards {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+    .why-card {
+        min-height: auto;
+
+        padding: 22px;
+
+        gap: 18px;
+    }
+
+    .why-icon {
+        width: 55px;
+        min-width: 55px;
+
+        height: 55px;
+    }
+
+    .why-card-content h3 {
+        font-size: 19px;
+    }
+
+    .why-card-content p {
+        font-size: 15px;
+    }
+}
+
+
+/* ==========================================
+   CELULARES PEQUEÑOS
+========================================== */
+
+@media (max-width: 380px) {
+
+    .hero-content {
+        padding: 40px 18px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero-image {
+        height: 260px;
+
+        min-height: 260px;
+    }
+
+
+    /* MÉTRICAS */
+
+    .metrics {
+        padding: 30px 20px;
+    }
+
+    .metric-icon {
+        width: 50px;
+        min-width: 50px;
+
+        height: 50px;
+
+        font-size: 37px;
+    }
+
+
+    /* ¿POR QUÉ ELEGIR TALENTUM? */
+
+    .why-talentum {
+        padding: 40px 18px;
+    }
+
+    .why-label {
+        font-size: 12px;
+    }
+
+    .why-title h2 {
+        font-size: 30px;
+    }
+
+    .why-description p {
+        font-size: 15px;
+    }
+
+    .why-card {
+        padding: 20px 16px;
+
+        gap: 14px;
+    }
+
+    .why-icon {
+        width: 48px;
+        min-width: 48px;
+
+        height: 48px;
+    }
+
+    .why-card-content h3 {
+        font-size: 18px;
+    }
+
+    .why-card-content p {
+        font-size: 14px;
+    }
+}
+
+/* ==================================================
+   SOLUCIONES PARA EMPRESAS
+================================================== */
+
+.solutions {
+    width: 100%;
+
+    padding:
+        60px
+        clamp(40px, 6vw, 120px)
+        75px;
+
+    background: #ffffff;
+}
+
+
+/* =========================
+   CABECERA
+========================= */
+
+.solutions-header {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 50px;
+
+    margin-bottom: 35px;
+}
+
+
+/* =========================
+   TÍTULO IZQUIERDO
+========================= */
+
+.solutions-title {
+    flex: 1;
+    min-width: 0;
+}
+
+.solutions-label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #00a9ad;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+.solutions-title h2 {
+    color: #0b2f67;
+
+    /*
+       Tamaño similar al título
+       de ¿Por qué elegir Talentum?
+    */
+    font-size: clamp(38px, 3vw, 52px);
+
+    font-weight: 700;
+
+    line-height: 1.05;
+}
+
+
+/* =========================
+   DESCRIPCIÓN DERECHA
+========================= */
+
+.solutions-description {
+    width: 100%;
+
+    max-width: 520px;
+
+    padding-bottom: 5px;
+}
+
+.solutions-description p {
+    color: #63799b;
+
+    font-size: 19px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   CONTENEDOR TARJETAS
+========================= */
+
+.solutions-cards {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+
+/* =========================
+   TARJETA
+========================= */
+
+.solution-card {
+    width: 100%;
+
+    background: #ffffff;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    border: 1px solid #e2e8f0;
+
+    box-shadow:
+        0 5px 15px
+        rgba(11, 47, 103, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* EFECTO AL PASAR EL MOUSE */
+
+.solution-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 15px 35px
+        rgba(11, 47, 103, 0.15);
+}
+
+
+/* =========================
+   IMAGEN
+========================= */
+
+.solution-image {
+    width: 100%;
+
+    height: 210px;
+
+    overflow: hidden;
+}
+
+.solution-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    transition: transform 0.4s ease;
+}
+
+
+/* ZOOM SUAVE */
+
+.solution-card:hover .solution-image img {
+    transform: scale(1.05);
+}
+
+
+/* =========================
+   CONTENIDO TARJETA
+========================= */
+
+.solution-content {
+    padding: 22px 20px 26px;
+}
+
+
+/* =========================
+   TÍTULO TARJETA
+========================= */
+
+.solution-content h3 {
+    margin-bottom: 12px;
+
+    color: #6548f4;
+
+    /*
+       Grande para mantener
+       el estilo de la sección anterior
+    */
+    font-size: 21px;
+
+    font-weight: 700;
+
+    line-height: 1.15;
+}
+
+
+/* =========================
+   DESCRIPCIÓN TARJETA
+========================= */
+
+.solution-content p {
+    color: #7184a1;
+
+    font-size: 17px;
+
+    line-height: 1.4;
+}
+
+
+/* ==================================================
+   SOLUCIONES - PANTALLAS GRANDES
+================================================== */
+
+@media (min-width: 1440px) {
+
+    .solutions {
+        padding-left: clamp(70px, 7vw, 140px);
+        padding-right: clamp(70px, 7vw, 140px);
+    }
+
+    .solutions-label {
+        font-size: 16px;
+    }
+
+    .solutions-title h2 {
+        font-size: 52px;
+    }
+
+    .solutions-description p {
+        font-size: 19px;
+    }
+
+    .solution-image {
+        height: 230px;
+    }
+
+    .solution-content {
+        padding: 24px 22px 28px;
+    }
+
+    .solution-content h3 {
+        font-size: 22px;
+    }
+
+    .solution-content p {
+        font-size: 17px;
+    }
+}
+
+
+/* ==================================================
+   SOLUCIONES - LAPTOP
+================================================== */
+
+@media (max-width: 1200px) {
+
+    .solutions {
+        padding-left: 45px;
+        padding-right: 45px;
+    }
+
+    .solutions-header {
+        gap: 35px;
+    }
+
+    .solutions-title h2 {
+        font-size: 40px;
+    }
+
+    .solutions-description p {
+        font-size: 17px;
+    }
+
+    .solutions-cards {
+        gap: 14px;
+    }
+
+    .solution-image {
+        height: 190px;
+    }
+
+    .solution-content {
+        padding: 20px 17px 23px;
+    }
+
+    .solution-content h3 {
+        font-size: 19px;
+    }
+
+    .solution-content p {
+        font-size: 16px;
+    }
+}
+
+
+/* ==================================================
+   SOLUCIONES - TABLET
+================================================== */
+
+@media (max-width: 900px) {
+
+    .solutions {
+        padding:
+            50px
+            40px
+            60px;
+    }
+
+    .solutions-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+
+        margin-bottom: 30px;
+    }
+
+    .solutions-description {
+        max-width: 600px;
+    }
+
+    .solutions-title h2 {
+        font-size: 38px;
+    }
+
+    .solutions-description p {
+        font-size: 17px;
+    }
+
+    /*
+       2 tarjetas por fila
+    */
+    .solutions-cards {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 20px;
+    }
+
+    .solution-image {
+        height: 220px;
+    }
+
+    .solution-content h3 {
+        font-size: 20px;
+    }
+
+    .solution-content p {
+        font-size: 16px;
+    }
+}
+
+
+/* ==================================================
+   SOLUCIONES - CELULAR
+================================================== */
+
+@media (max-width: 550px) {
+
+    .solutions {
+        padding:
+            45px
+            22px
+            55px;
+    }
+
+    .solutions-header {
+        margin-bottom: 25px;
+    }
+
+    .solutions-label {
+        font-size: 13px;
+    }
+
+    .solutions-title h2 {
+        font-size: 34px;
+
+        line-height: 1.08;
+    }
+
+    .solutions-description p {
+        font-size: 16px;
+    }
+
+    /*
+       Una tarjeta por fila
+    */
+    .solutions-cards {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .solution-image {
+        height: 230px;
+    }
+
+    .solution-content {
+        padding: 22px;
+    }
+
+    .solution-content h3 {
+        font-size: 20px;
+
+        margin-bottom: 10px;
+    }
+
+    .solution-content p {
+        font-size: 15px;
+    }
+}
+
+
+/* ==================================================
+   SOLUCIONES - CELULARES PEQUEÑOS
+================================================== */
+
+@media (max-width: 380px) {
+
+    .solutions {
+        padding:
+            40px
+            18px
+            50px;
+    }
+
+    .solutions-label {
+        font-size: 12px;
+    }
+
+    .solutions-title h2 {
+        font-size: 30px;
+    }
+
+    .solutions-description p {
+        font-size: 15px;
+    }
+
+    .solution-image {
+        height: 200px;
+    }
+
+    .solution-content {
+        padding: 20px 16px;
+    }
+
+    .solution-content h3 {
+        font-size: 18px;
+    }
+
+    .solution-content p {
+        font-size: 14px;
+    }
+}
+
+/* =========================
+   NUESTRO PROCESO
+========================= */
+
+.proceso {
+    width: 100%;
+    padding: 10px clamp(25px, 6vw, 120px);
+    background: #ffffff;
+    text-align: center;
+}
+
+.stepper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 55px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stepper-line {
+    position: absolute;
+    top: 17px;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background: #13c5c4;
+    z-index: 1;
+}
+
+.step {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 130px;
+}
+
+.step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #13c5c4;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+}
+
+.step-icon {
+    font-size: 38px;
+    color: #0b2f67;
+    margin-bottom: 12px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-label {
+    color: #0b2f67;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+/* =========================
+   DESAFÍOS DEL MERCADO
+========================= */
+
+.desafios {
+    width: 100%;
+    padding: 60px clamp(25px, 6vw, 120px);
+    display: grid;
+    grid-template-columns: 55% 45%;
+    gap: 40px;
+    align-items: center;
+    background: #ffffff;
+}
+
+.desafios-desc {
+    color: #63799b;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 35px;
+}
+
+.problems-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px 30px;
+}
+
+.problem-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.problem-icon {
+    font-size: 26px;
+    color: #0b2f67;
+    min-width: 32px;
+}
+
+.problem-info h3 {
+    color: #0b2f67;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.problem-info p {
+    color: #63799b;
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+.desafios-image {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.desafios-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.desafios-banner-text {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(11, 47, 103, 0.92) 10%, rgba(11, 47, 103, 0.2) 70%);
+    padding: 35px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.desafios-banner-text h3 {
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 15px;
+    max-width: 320px;
+}
+
+.banner-line {
+    width: 65px;
+    height: 4px;
+    background: #13c5c4;
+    border-radius: 2px;
+}
+
+/* =========================
+   EMPRESAS ASOCIADAS
+========================= */
+
+.empresas {
+    width: 100%;
+    padding: 50px clamp(25px, 6vw, 120px);
+    background: #ffffff;
+    text-align: center;
+}
+
+.carousel-wrapper {
+    position: relative;
+    max-width: 1100px;
+    height: 100%;
+    margin: 35px auto 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-container {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    align-items: center;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
+}
+
+.carousel-slide {
+    flex: 0 0 33.333%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.carousel-slide img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.carousel-slide img:hover {
+    transform: scale(1.08);
+}
+
+.carousel-arrow {
+    background: transparent;
+    border: none;
+    color: #13c5c4;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 10px 15px;
+    z-index: 10;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.carousel-arrow:hover {
+    transform: scale(1.25);
+    color: #0b2f67;
+}
+
+/* Adaptación responsive */
+@media (max-width: 900px) {
+    .carousel-slide {
+        flex: 0 0 33.333%; /* 3 logos visibles */
+    }
+}
+
+@media (max-width: 600px) {
+    .carousel-slide {
+        flex: 0 0 50%; /* 2 logos visibles */
+    }
+}
+
+
+/* =========================
+   TESTIMONIOS
+========================= */
+
+.testimonios {
+    width: 100%;
+    padding: 60px clamp(25px, 6vw, 120px);
+    background: #f1f8fc;
+}
+
+.testimonios-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.testimonio-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(11, 47, 103, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.testimonio-card .quote {
+    color: #63799b;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.testimonial-author img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.testimonial-author strong {
+    display: block;
+    color: #0b2f67;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.testimonial-author p {
+    color: #63799b;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.testimonial-author span {
+    color: #9cb0ce;
+    font-size: 11px;
+}
+
+/* ==========================================
+   ADAPTACIONES RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+    .desafios {
+        grid-template-columns: 1fr;
+    }
+
+    .desafios-image {
+        height: 350px;
+    }
+
+    .testimonios-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .stepper {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .stepper-line {
+        display: none;
+    }
+
+    .problems-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .logos-grid {
+        justify-content: flex-start;
+    }
+}
+
+/* =========================
+   SECCIÓN FORMULARIOS
+========================= */
+
+.formularios-section {
+    width: 100%;
+    padding: 70px clamp(25px, 6vw, 120px);
+    background: #ffffff;
+}
+
+.main-contact-title {
+    max-width: 900px;
+    margin: 0 auto 50px auto;
+}
+
+.forms-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: stretch;
+}
+
+.form-card {
+    border-radius: 20px;
+    padding: 40px 35px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Colores de fondo de los cards */
+.card-empresas {
+    background-color: #e8f7fa;
+}
+
+.card-candidatos {
+    background-color: #f3ebff;
+}
+
+/* Tags superiores */
+.card-tag {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.tag-teal {
+    color: #13c5c4;
+}
+
+.tag-purple {
+    color: #7047ef;
+}
+
+/* Títulos internos de los formularios */
+.card-title {
+    color: #0b2f67;
+    font-family: Georgia, 'Times New Roman', Times, serif; /* Tipografía Serif elegante del Figma */
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.card-subtitle {
+    color: #63799b;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+/* Estructura del Formulario */
+.custom-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-grow: 1;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+.form-row.full-width input {
+    width: 100%;
+}
+
+.form-row.flex-70-30 input:first-child {
+    flex: 2;
+}
+
+.form-row.flex-70-30 input:last-child {
+    flex: 1;
+}
+
+.form-row.flex-equal > * {
+    flex: 1;
+}
+
+/* Inputs styling */
+.custom-form input {
+    width: 100%;
+    height: 48px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 8px;
+    background: #ffffff;
+    font-size: 13px;
+    color: #0b2f67;
+    outline: none;
+}
+
+.custom-form input::placeholder {
+    color: #9cb0ce;
+}
+
+/* Campo Select personalizado */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.select-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #0b2f67;
+    font-size: 12px;
+    pointer-events: none;
+}
+
+/* Campo Cargar CV personalizado */
+.file-wrapper {
+    height: 48px;
+    padding: 0 18px;
+    border-radius: 8px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.file-placeholder {
+    font-size: 13px;
+    color: #9cb0ce;
+}
+
+.upload-icon {
+    color: #0b2f67;
+    font-size: 14px;
+}
+
+/* Botones de formulario */
+.form-btn {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.form-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+}
+
+.btn-dark-blue {
+    background-color: #0b3270;
+}
+
+.btn-purple {
+    background-color: #6548f4;
+}
+
+/* ==========================================
+   ADAPTACIONES RESPONSIVE FORMULARIOS
+========================================== */
+
+@media (max-width: 900px) {
+    .forms-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+@media (max-width: 550px) {
+    .form-card {
+        padding: 30px 20px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .form-row.flex-70-30 {
+        flex-direction: column;
+    }
+
+    .card-title {
+        font-size: 22px;
+    }
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    width: 100%;
+    background: #232f3e; /* Tono oscuro exacto del diseño Figma */
+    color: #ffffff;
+    padding-top: 60px;
+}
+
+.footer-container {
+    width: 100%;
+    padding: 0 clamp(25px, 6vw, 120px);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr 1.5fr;
+    gap: clamp(30px, 4vw, 60px);
+    margin-bottom: 50px;
+}
+
+/* Columna 1 */
+.footer-logo img {
+    width: 160px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.footer-about p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 320px;
+}
+
+/* Títulos de columnas */
+.footer-col h3 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+/* Listas y enlaces */
+.footer-links,
+.footer-contact {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.footer-links a,
+.footer-contact a,
+.footer-contact li {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+    color: #13c5c4;
+}
+
+/* Barra inferior */
+.footer-bottom {
+    width: 100%;
+    padding: 25px clamp(25px, 6vw, 120px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-bottom-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom-links a:hover {
+    color: #ffffff;
+}
+
+/* ==========================================
+   FOOTER RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+}
+
+@media (max-width: 550px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+}
