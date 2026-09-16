@@ -1,0 +1,825 @@
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    color: #0b2f67;
+    background: #ffffff;
+
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.header {
+    width: 100%;
+    background: #ffffff;
+}
+
+.navbar {
+    width: 100%;
+    min-height: 80px;
+
+    padding: 0 clamp(25px, 6vw, 120px);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    display: block;
+}
+
+.logo img {
+    width: 145px;
+    height: auto;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+
+    gap: clamp(20px, 2.5vw, 40px);
+
+    list-style: none;
+}
+
+.nav-menu a {
+    position: relative;
+
+    color: #0b2f67;
+
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: #6548f4;
+}
+
+.nav-menu a.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: -12px;
+
+    height: 3px;
+
+    background: #6548f4;
+
+    border-radius: 10px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    width: 100%;
+    min-height: 520px;
+
+    display: grid;
+
+    /* Texto izquierda / imagen derecha */
+    grid-template-columns: 47% 53%;
+
+    background: #0b3270;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   CONTENIDO HERO
+========================= */
+
+.hero-content {
+    position: relative;
+
+    /*
+       IMPORTANTE:
+       El contenido está por encima
+       y tiene fondo azul sólido.
+       El degradado NO tapa las letras.
+    */
+
+    z-index: 5;
+
+    min-width: 0;
+
+    padding:
+        clamp(50px, 6vw, 100px)
+        clamp(30px, 6vw, 120px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: #0b3270;
+}
+
+
+/* =========================
+   TITULO HERO
+========================= */
+
+.hero h1 {
+    position: relative;
+
+    z-index: 6;
+
+    max-width: 700px;
+
+    color: #ffffff;
+
+    font-size: clamp(36px, 3.5vw, 60px);
+
+    line-height: 1.05;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: #13c5c4;
+}
+
+
+/* =========================
+   DESCRIPCIÓN HERO
+========================= */
+
+.hero p {
+    position: relative;
+
+    z-index: 6;
+
+    max-width: 620px;
+
+    color: #ffffff;
+
+    font-size: clamp(14px, 1.1vw, 18px);
+
+    line-height: 1.6;
+
+    opacity: 0.9;
+}
+
+
+/* =========================
+   BOTONES HERO
+========================= */
+
+.hero-buttons {
+    position: relative;
+
+    z-index: 6;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 18px;
+
+    margin-top: 30px;
+}
+
+.btn {
+    min-width: 170px;
+
+    padding: 15px 25px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+    text-align: center;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+
+/* BOTÓN EMPRESAS */
+
+.btn-primary {
+    color: #ffffff;
+
+    background: #7047ef;
+}
+
+.btn-primary:hover {
+    background: #6037e4;
+}
+
+
+/* BOTÓN CANDIDATOS */
+
+.btn-outline {
+    color: #ffffff;
+
+    border: 2px solid #ffffff;
+
+    background: transparent;
+}
+
+.btn-outline:hover {
+    color: #0b3270;
+
+    background: #ffffff;
+}
+
+
+/* =========================
+   IMAGEN HERO
+========================= */
+
+.hero-image {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    min-height: 520px;
+
+    overflow: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    /*
+       Puedes cambiar center por:
+       55% center
+       60% center
+       etc. si quieres mover la foto.
+    */
+
+    object-position: center center;
+
+    display: block;
+}
+
+
+/* ==========================================
+   DIFUMINADO ENTRE AZUL E IMAGEN
+========================================== */
+
+.hero-image::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    /*
+       Empieza EXACTAMENTE donde
+       comienza la fotografía.
+    */
+
+    left: 0;
+
+    /*
+       El degradado ocupa solamente
+       una parte de la fotografía.
+    */
+
+    width: 38%;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background: linear-gradient(
+        to right,
+
+        #0b3270 0%,
+
+        rgba(11, 50, 112, 0.98) 8%,
+
+        rgba(11, 50, 112, 0.90) 20%,
+
+        rgba(11, 50, 112, 0.70) 38%,
+
+        rgba(11, 50, 112, 0.45) 56%,
+
+        rgba(11, 50, 112, 0.22) 72%,
+
+        rgba(11, 50, 112, 0.08) 86%,
+
+        rgba(11, 50, 112, 0) 100%
+    );
+}
+
+
+/* =========================
+   MÉTRICAS
+========================= */
+
+.metrics {
+    width: 100%;
+
+    padding:
+        40px
+        clamp(40px, 6vw, 120px);
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    align-items: center;
+
+    gap: clamp(30px, 4vw, 70px);
+
+    background: #ffffff;
+}
+
+
+/* =========================
+   CADA MÉTRICA
+========================= */
+
+.metric {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    min-width: 0;
+}
+
+
+/* =========================
+   ICONOS DE LAS MÉTRICAS
+========================= */
+
+.metric-icon {
+    width: 65px;
+    min-width: 65px;
+
+    height: 65px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #0bbbbb;
+
+    font-size: 48px;
+
+    line-height: 1;
+}
+
+
+/*
+   Los <i> de Font Awesome
+   ocuparán correctamente
+   el espacio del icono.
+*/
+
+.metric-icon i {
+    display: block;
+
+    color: #0bbbbb;
+
+    font-size: inherit;
+
+    line-height: 1;
+}
+
+
+/* =========================
+   INFORMACIÓN DE MÉTRICA
+========================= */
+
+.metric-info {
+    min-width: 0;
+}
+
+
+/* NÚMERO */
+
+.metric-info strong,
+.metric strong {
+    display: block;
+
+    color: #0b2f67;
+
+    font-size: clamp(23px, 2vw, 30px);
+
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+
+/* TEXTO */
+
+.metric-info p,
+.metric p {
+    margin-top: 5px;
+
+    color: #63799b;
+
+    font-size: 14px;
+
+    line-height: 1.2;
+}
+
+
+/* ==========================================
+   PANTALLAS GRANDES
+   1440px EN ADELANTE
+========================================== */
+
+@media (min-width: 1440px) {
+
+    .hero {
+        min-height: 540px;
+
+        grid-template-columns: 46% 54%;
+    }
+
+    .hero-image {
+        min-height: 540px;
+    }
+
+    .hero h1 {
+        font-size: clamp(48px, 3.2vw, 64px);
+    }
+
+    /*
+       En pantallas grandes hacemos
+       la transición un poco más amplia.
+    */
+
+    .hero-image::before {
+        width: 40%;
+    }
+
+
+    /* MÉTRICAS */
+
+    .metrics {
+        padding-left: clamp(70px, 7vw, 140px);
+        padding-right: clamp(70px, 7vw, 140px);
+    }
+
+    .metric-icon {
+        width: 70px;
+        min-width: 70px;
+
+        font-size: 52px;
+    }
+}
+
+
+/* ==========================================
+   LAPTOP
+========================================== */
+
+@media (max-width: 1200px) {
+
+    .navbar {
+        padding-left: 45px;
+        padding-right: 45px;
+    }
+
+    .hero {
+        grid-template-columns: 48% 52%;
+    }
+
+    .hero-content {
+        padding: 55px 45px;
+    }
+
+    .hero h1 {
+        font-size: clamp(36px, 4vw, 50px);
+    }
+
+    .hero-image::before {
+        width: 35%;
+    }
+
+
+    /* MÉTRICAS */
+
+    .metrics {
+        padding-left: 45px;
+        padding-right: 45px;
+
+        gap: 30px;
+    }
+
+    .metric {
+        gap: 15px;
+    }
+
+    .metric-icon {
+        width: 55px;
+        min-width: 55px;
+
+        height: 55px;
+
+        font-size: 43px;
+    }
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 0 30px;
+    }
+
+    /*
+       Por ahora ocultamos el menú.
+       Luego podemos poner hamburguesa.
+    */
+
+    .nav-menu {
+        display: none;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        grid-template-columns: 1fr;
+
+        min-height: auto;
+    }
+
+    .hero-content {
+        padding: 60px 40px;
+    }
+
+    .hero h1 {
+        max-width: 650px;
+
+        font-size: 46px;
+    }
+
+    .hero p {
+        max-width: 600px;
+    }
+
+    .hero-image {
+        width: 100%;
+
+        height: 430px;
+
+        min-height: 430px;
+    }
+
+    .hero-image img {
+        object-position: center center;
+    }
+
+    /*
+       Como la imagen ahora está debajo
+       del texto, quitamos el degradado
+       lateral.
+    */
+
+    .hero-image::before {
+        display: none;
+    }
+
+
+    /* MÉTRICAS */
+
+    .metrics {
+        grid-template-columns: repeat(2, 1fr);
+
+        padding: 40px;
+
+        gap: 35px;
+    }
+
+    .metric {
+        gap: 16px;
+    }
+
+    .metric-icon {
+        width: 60px;
+        min-width: 60px;
+
+        height: 60px;
+
+        font-size: 45px;
+    }
+}
+
+
+/* ==========================================
+   CELULAR
+========================================== */
+
+@media (max-width: 550px) {
+
+    /* NAVBAR */
+
+    .navbar {
+        min-height: 65px;
+
+        padding: 0 20px;
+    }
+
+    .logo img {
+        width: 120px;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        width: 100%;
+
+        min-height: auto;
+
+        grid-template-columns: 1fr;
+    }
+
+    .hero-content {
+        padding: 45px 22px;
+    }
+
+    .hero h1 {
+        font-size: 37px;
+
+        line-height: 1.08;
+
+        margin-bottom: 20px;
+    }
+
+    .hero p {
+        font-size: 14px;
+
+        line-height: 1.6;
+    }
+
+    .hero-buttons {
+        width: 100%;
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        margin-top: 25px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .hero-image {
+        width: 100%;
+
+        height: 300px;
+
+        min-height: 300px;
+    }
+
+    .hero-image img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        object-position: center;
+    }
+
+    .hero-image::before {
+        display: none;
+    }
+
+
+    /* MÉTRICAS */
+
+    .metrics {
+        grid-template-columns: 1fr;
+
+        padding: 35px 25px;
+
+        gap: 30px;
+    }
+
+    .metric {
+        width: 100%;
+
+        gap: 18px;
+    }
+
+    .metric-icon {
+        width: 58px;
+        min-width: 58px;
+
+        height: 58px;
+
+        font-size: 42px;
+    }
+
+    .metric-info strong,
+    .metric strong {
+        font-size: 26px;
+    }
+
+    .metric-info p,
+    .metric p {
+        font-size: 14px;
+    }
+}
+
+
+/* ==========================================
+   CELULARES PEQUEÑOS
+========================================== */
+
+@media (max-width: 380px) {
+
+    .hero-content {
+        padding: 40px 18px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero-image {
+        height: 260px;
+
+        min-height: 260px;
+    }
+
+
+    /* MÉTRICAS */
+
+    .metrics {
+        padding: 30px 20px;
+    }
+
+    .metric-icon {
+        width: 50px;
+        min-width: 50px;
+
+        height: 50px;
+
+        font-size: 37px;
+    }
+}
