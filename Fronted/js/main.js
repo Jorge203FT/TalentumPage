@@ -2,6 +2,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("Talentum Selección iniciado correctamente");
 
+    /* ==========================================
+   NAVBAR - ENLACE ACTIVO
+========================================== */
+
+const navLinks = document.querySelectorAll(".nav-menu a");
+
+navLinks.forEach((link) => {
+
+    link.addEventListener("click", () => {
+
+        // Quitar active de todos
+        navLinks.forEach((item) => {
+            item.classList.remove("active");
+        });
+
+        // Agregar active al enlace presionado
+        link.classList.add("active");
+
+    });
+
+});
+
 
     /* ==========================================
        MENÚ HAMBURGUESA RESPONSIVE
@@ -509,5 +531,228 @@ document.addEventListener("DOMContentLoaded", () => {
         startAutoPlay();
 
     }
+
+ 
+
+});
+
+/* ==========================================
+   CARRUSEL DE TESTIMONIOS
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const track = document.getElementById("testimoniosTrack");
+    const prevButton = document.getElementById("testimonialPrev");
+    const nextButton = document.getElementById("testimonialNext");
+
+    // Si alguno de los elementos no existe, detenemos este código
+    if (!track || !prevButton || !nextButton) {
+        return;
+    }
+
+    const cards = Array.from(
+        track.querySelectorAll(".testimonio-card")
+    );
+
+    let currentIndex = 0;
+    let autoPlay;
+
+
+    /* ==========================================
+       CANTIDAD DE TESTIMONIOS VISIBLES
+    ========================================== */
+
+    function getVisibleCards() {
+
+        // Celular = 1
+        if (window.innerWidth <= 600) {
+            return 1;
+        }
+
+        // Tablet y computadora = 2
+        return 2;
+    }
+
+
+    /* ==========================================
+       ACTUALIZAR POSICIÓN
+    ========================================== */
+
+    function updateCarousel() {
+
+        const visibleCards = getVisibleCards();
+
+        const maxIndex = Math.max(
+            0,
+            cards.length - visibleCards
+        );
+
+
+        // Evitar salir del carrusel
+        if (currentIndex > maxIndex) {
+            currentIndex = 0;
+        }
+
+        if (currentIndex < 0) {
+            currentIndex = maxIndex;
+        }
+
+
+        // Obtenemos el ancho real de una tarjeta
+        const cardWidth =
+            cards[0].getBoundingClientRect().width;
+
+
+        // Obtenemos el espacio GAP del track
+        const trackStyles =
+            window.getComputedStyle(track);
+
+        const gap =
+            parseFloat(trackStyles.gap) || 0;
+
+
+        // Distancia que debemos mover
+        const movement =
+            currentIndex * (cardWidth + gap);
+
+
+        track.style.transform =
+            `translateX(-${movement}px)`;
+
+    }
+
+
+    /* ==========================================
+       SIGUIENTE
+    ========================================== */
+
+    function nextTestimonial() {
+
+        const visibleCards = getVisibleCards();
+
+        const maxIndex = Math.max(
+            0,
+            cards.length - visibleCards
+        );
+
+        if (currentIndex >= maxIndex) {
+
+            currentIndex = 0;
+
+        } else {
+
+            currentIndex++;
+
+        }
+
+        updateCarousel();
+
+    }
+
+
+    /* ==========================================
+       ANTERIOR
+    ========================================== */
+
+    function previousTestimonial() {
+
+        const visibleCards = getVisibleCards();
+
+        const maxIndex = Math.max(
+            0,
+            cards.length - visibleCards
+        );
+
+        if (currentIndex <= 0) {
+
+            currentIndex = maxIndex;
+
+        } else {
+
+            currentIndex--;
+
+        }
+
+        updateCarousel();
+
+    }
+
+
+    /* ==========================================
+       AUTOPLAY
+    ========================================== */
+
+    function startAutoPlay() {
+
+        stopAutoPlay();
+
+        autoPlay = setInterval(() => {
+
+            nextTestimonial();
+
+        }, 4000);
+
+    }
+
+
+    function stopAutoPlay() {
+
+        if (autoPlay) {
+
+            clearInterval(autoPlay);
+
+        }
+
+    }
+
+
+    /* ==========================================
+       CLICK FLECHA DERECHA
+    ========================================== */
+
+    nextButton.addEventListener("click", () => {
+
+        nextTestimonial();
+
+        // Reiniciamos el tiempo automático
+        startAutoPlay();
+
+    });
+
+
+    /* ==========================================
+       CLICK FLECHA IZQUIERDA
+    ========================================== */
+
+    prevButton.addEventListener("click", () => {
+
+        previousTestimonial();
+
+        startAutoPlay();
+
+    });
+
+
+    /* ==========================================
+       RESPONSIVE
+    ========================================== */
+
+    window.addEventListener("resize", () => {
+
+        currentIndex = 0;
+
+        updateCarousel();
+
+    });
+
+
+    /* ==========================================
+       INICIAR
+    ========================================== */
+
+    updateCarousel();
+
+    startAutoPlay();
 
 });
