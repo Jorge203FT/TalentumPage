@@ -774,207 +774,347 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ==========================================
    FORMULARIOS - FIRESTORE
 ========================================== */
-
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* FORMULARIO EMPRESAS */
+    /*Modal*/
+    const modalOverlay = document.getElementById("custom-modal");
+    const modalIcon = document.getElementById("modal-icon");
+    const modalIconSymbol = document.getElementById("modal-icon-symbol");
+    const modalTitle = document.getElementById("modal-title");
+    const modalMessage = document.getElementById("modal-message");
+    const modalCloseBtn = document.getElementById("modal-close-btn");
 
-    const formEmpresas = document.getElementById("form-empresas");
+    // Función para mostrar el modal dinámico
+    function mostrarModal({ titulo, mensaje, tipo = "warning" }) {
+        if (!modalOverlay) return;
 
-    if (formEmpresas) {
+        modalTitle.textContent = titulo;
+        modalMessage.innerHTML = mensaje;
 
-        formEmpresas.addEventListener("submit", async (event) => {
+        // Limpiar clases del icono
+        modalIcon.className = "modal-icon " + tipo;
 
-            event.preventDefault();
+        // Cambiar icono según el tipo de respuesta
+        if (tipo === "success") {
+            modalIconSymbol.className = "fa-solid fa-circle-check";
+        } else if (tipo === "error") {
+            modalIconSymbol.className = "fa-solid fa-circle-xmark";
+        } else {
+            modalIconSymbol.className = "fa-solid fa-triangle-exclamation";
+        }
 
-            const boton = formEmpresas.querySelector('button[type="submit"]');
-
-            const ruc = document.getElementById("empresa-ruc").value.trim();
-            const empresa = document.getElementById("empresa-nombre").value.trim();
-            const contacto = document.getElementById("empresa-contacto").value.trim();
-            const cargo = document.getElementById("empresa-cargo").value.trim();
-            const correo = document.getElementById("empresa-correo").value.trim();
-            const telefono = document.getElementById("empresa-telefono").value.trim();
-            const interes = document.getElementById("empresa-interes").value.trim();
-
-            try {
-
-                boton.disabled = true;
-                boton.textContent = "Enviando...";
-
-                const idEmpresa = `${empresa}_${ruc}`
-    .trim()
-    .replace(/\s+/g, "_")
-    .replace(/[\/.#$\[\]]/g, "")
-    .toUpperCase();
-
-await setDoc(
-    doc(db, "solicitudes_empresas", idEmpresa),
-    {
-        ruc,
-        empresa,
-        contacto,
-        cargo,
-        correo,
-        telefono,
-        interes,
-        fechaRegistro: serverTimestamp()
+        modalOverlay.classList.add("active");
     }
-                );
 
-                alert("Solicitud enviada correctamente.");
-
-                formEmpresas.reset();
-
-            } catch (error) {
-
-                console.error(
-                    "Error al guardar la solicitud:",
-                    error
-                );
-
-                alert(
-                    "No se pudo enviar la solicitud. Inténtalo nuevamente."
-                );
-
-            } finally {
-
-                boton.disabled = false;
-                boton.innerHTML = "Solicitar información &rarr;";
-
-            }
-
+    // Eventos para cerrar el modal
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener("click", () => {
+            modalOverlay.classList.remove("active");
         });
+    }
 
+    if (modalOverlay) {
+        modalOverlay.addEventListener("click", (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove("active");
+            }
+        });
+    }
+
+    /*Validación de datos ingresados en el formulario*/
+    function esCorreoValido(correo) {
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regexEmail.test(correo);
+    }
+
+    function esSoloNumeros(valor) {
+        return /^\d+$/.test(valor);
+    }
+
+    function limpiarErroresInputs(formulario) {
+        const inputs = formulario.querySelectorAll("input");
+        inputs.forEach(input => input.classList.remove("input-error"));
+    }
+
+    function marcarInputError(idInput) {
+        const input = document.getElementById(idInput);
+        if (input) {
+            input.classList.add("input-error");
+            input.focus();
+        }
     }
 
 
     /* ==========================================
-   SELECCIONAR Y MOSTRAR CV
-========================================== */
+       SELECCIONAR Y MOSTRAR CV (CANDIDATOS)
+    ========================================== */
+    const inputCV = document.getElementById("cv-file");
+    const nombreCV = document.getElementById("cv-file-name");
 
-const inputCV = document.getElementById("cv-file");
-const nombreCV = document.getElementById("cv-file-name");
+    if (inputCV && nombreCV) {
+        inputCV.addEventListener("change", () => {
+            const archivo = inputCV.files[0];
 
-if (inputCV && nombreCV) {
+            if (archivo) {
+                const extensionesPermitidas = [
+                    "application/pdf",
+                    "application/msword",
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                ];
 
-    inputCV.addEventListener("change", () => {
+                if (!extensionesPermitidas.includes(archivo.type)) {
+                    mostrarModal({
+                        titulo: "Formato de archivo inválido",
+                        mensaje: "Solo se admiten documentos en formato <b>PDF, DOC o DOCX</b>.",
+                        tipo: "warning"
+                    });
+                    inputCV.value = "";
+                    nombreCV.textContent = "Cargar CV";
+                    return;
+                }
 
-        const archivo = inputCV.files[0];
-
-        if (archivo) {
-
-            const extensionesPermitidas = [
-                "application/pdf",
-                "application/msword",
-                "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-            ];
-
-            if (!extensionesPermitidas.includes(archivo.type)) {
-
-                alert("Solo puedes seleccionar archivos PDF, DOC o DOCX.");
-
-                inputCV.value = "";
+                nombreCV.textContent = archivo.name;
+            } else {
                 nombreCV.textContent = "Cargar CV";
-
-                return;
             }
+        });
+    }
 
-            nombreCV.textContent = archivo.name;
-
-        } else {
-
-            nombreCV.textContent = "Cargar CV";
-
-        }
-
-    });
-
-}
-
-    /* FORMULARIO CANDIDATOS */
-
+    /* ==========================================
+       FORMULARIO CANDIDATOS
+    ========================================== */
     const formCandidatos = document.getElementById("form-candidatos");
 
     if (formCandidatos) {
-
         formCandidatos.addEventListener("submit", async (event) => {
-
             event.preventDefault();
+            limpiarErroresInputs(formCandidatos);
 
-            const boton = formCandidatos.querySelector('button[type="submit"]');
-
-            const nombre = document.getElementById("candidato-nombre").value.trim();
-            const dni = document.getElementById("candidato-dni").value.trim();
-            const modalidad = document.getElementById("candidato-modalidad").value.trim();
-            const telefono = document.getElementById("candidato-telefono").value.trim();
-            const correo = document.getElementById("candidato-correo").value.trim();
-            const area = document.getElementById("candidato-area").value.trim();
-
+            const nombre = document.getElementById("candidato-nombre")?.value.trim() || "";
+            const dni = document.getElementById("candidato-dni")?.value.trim() || "";
+            const modalidad = document.getElementById("candidato-modalidad")?.value.trim() || "";
+            const telefono = document.getElementById("candidato-telefono")?.value.trim() || "";
+            const correo = document.getElementById("candidato-correo")?.value.trim() || "";
+            const area = document.getElementById("candidato-area")?.value.trim() || "";
             const archivoCV = document.getElementById("cv-file");
 
-const cvNombre = archivoCV && archivoCV.files.length > 0
-    ? archivoCV.files[0].name
-    : "Sin CV";
+            /* --- VALIDACIONES DE CAMPOS --- */
+            if (!nombre || !dni || !modalidad || !telefono || !correo || !area) {
+                mostrarModal({
+                    titulo: "Campos Incompletos",
+                    mensaje: "Todos los campos de texto son obligatorios.",
+                    tipo: "warning"
+                });
+                return;
+            }
+
+            if (nombre.length < 3) {
+                marcarInputError("candidato-nombre");
+                mostrarModal({
+                    titulo: "Nombre Inválido",
+                    mensaje: "Por favor, ingresa tu nombre completo.",
+                    tipo: "warning"
+                });
+                return;
+            }
+
+            if (!esSoloNumeros(dni) || dni.length !== 8) {
+                marcarInputError("candidato-dni");
+                mostrarModal({
+                    titulo: "DNI Inválido",
+                    mensaje: "El número de DNI debe contener exactamente <b>8 dígitos numéricos</b>.",
+                    tipo: "warning"
+                });
+                return;
+            }
+
+            if (!esSoloNumeros(telefono) || telefono.length !== 9) {
+                marcarInputError("candidato-telefono");
+                mostrarModal({
+                    titulo: "Teléfono Inválido",
+                    mensaje: "El número de teléfono debe contener exactamente <b>9 dígitos</b>.",
+                    tipo: "warning"
+                });
+                return;
+            }
+
+            if (!esCorreoValido(correo)) {
+                marcarInputError("candidato-correo");
+                mostrarModal({
+                    titulo: "Correo Inválido",
+                    mensaje: "Ingresa un correo electrónico con formato válido (ejemplo@correo.com).",
+                    tipo: "warning"
+                });
+                return;
+            }
+
+            // Validar que se haya subido el archivo CV obligatorio
+            if (!archivoCV || archivoCV.files.length === 0) {
+                mostrarModal({
+                    titulo: "CV Obligatorio",
+                    mensaje: "Por favor, adjunta tu currículum vitae antes de enviar la solicitud.",
+                    tipo: "warning"
+                });
+                return;
+            }
+
+            const cvNombre = archivoCV.files[0].name;
+            const boton = formCandidatos.querySelector('button[type="submit"]');
 
             try {
-
                 boton.disabled = true;
                 boton.textContent = "Enviando...";
 
                 const idCandidato = `${nombre}_${dni}`
-    .trim()
-    .replace(/\s+/g, "_")
-    .replace(/[\/.#$\[\]]/g, "")
-    .toUpperCase();
+                    .trim()
+                    .replace(/\s+/g, "_")
+                    .replace(/[\/.#$\[\]]/g, "")
+                    .toUpperCase();
 
-await setDoc(
-    doc(db, "solicitudes_candidatos", idCandidato),
-    {
-        nombre,
-        dni,
-        modalidad,
-        telefono,
-        correo,
-        area,
-        cvNombre,
-        fechaRegistro: serverTimestamp()
-    }
-
-                
-          
+                await setDoc(
+                    doc(db, "solicitudes_candidatos", idCandidato),
+                    {
+                        nombre,
+                        dni,
+                        modalidad,
+                        telefono,
+                        correo,
+                        area,
+                        cvNombre,
+                        fechaRegistro: serverTimestamp()
+                    }
                 );
 
-                alert("Registro enviado correctamente.");
+                mostrarModal({
+                    titulo: "¡Registro Exitoso!",
+                    mensaje: "Tu hoja de vida ha sido registrada correctamente en nuestra bolsa de trabajo.",
+                    tipo: "success"
+                });
 
                 formCandidatos.reset();
-
-                const nombreCV = document.getElementById("cv-file-name");
 
                 if (nombreCV) {
                     nombreCV.textContent = "Cargar CV";
                 }
 
             } catch (error) {
-
-                console.error(
-                    "Error al guardar candidato:",
-                    error
-                );
-
-                alert(
-                    "No se pudo enviar el registro. Inténtalo nuevamente."
-                );
-
+                console.error("Error al guardar candidato:", error);
+                mostrarModal({
+                    titulo: "Error al registrar",
+                    mensaje: "No se pudo guardar la información. Por favor, vuelve a intentarlo en unos momentos.",
+                    tipo: "error"
+                });
             } finally {
-
                 boton.disabled = false;
                 boton.innerHTML = "Enviar mi CV &rarr;";
+            }
+        });
+    }
 
+    /* ==========================================
+       FORMULARIO EMPRESAS
+    ========================================== */
+    const formEmpresas = document.getElementById("form-empresas");
+
+    if (formEmpresas) {
+        formEmpresas.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            limpiarErroresInputs(formEmpresas);
+
+            const ruc = document.getElementById("empresa-ruc")?.value.trim() || "";
+            const empresa = document.getElementById("empresa-nombre")?.value.trim() || "";
+            const contacto = document.getElementById("empresa-contacto")?.value.trim() || "";
+            const cargo = document.getElementById("empresa-cargo")?.value.trim() || "";
+            const correo = document.getElementById("empresa-correo")?.value.trim() || "";
+            const telefono = document.getElementById("empresa-telefono")?.value.trim() || "";
+            const interes = document.getElementById("empresa-interes")?.value.trim() || "";
+
+            /* --- VALIDACIONES DE CAMPOS --- */
+            if (!ruc || !empresa || !contacto || !cargo || !correo || !telefono || !interes) {
+                mostrarModal({
+                    titulo: "Campos incompletos",
+                    mensaje: "Por favor, completa todos los campos del formulario.",
+                    tipo: "warning"
+                });
+                return;
             }
 
-        });
+            if (!esSoloNumeros(ruc) || ruc.length !== 11) {
+                marcarInputError("empresa-ruc");
+                mostrarModal({
+                    titulo: "RUC Inválido",
+                    mensaje: "El número de RUC debe contener exactamente <b>11 dígitos numéricos</b>.",
+                    tipo: "warning"
+                });
+                return;
+            }
 
+            if (!esCorreoValido(correo)) {
+                marcarInputError("empresa-correo");
+                mostrarModal({
+                    titulo: "Correo Inválido",
+                    mensaje: "Por favor, ingresa una dirección de correo electrónico válida.",
+                    tipo: "warning"
+                });
+                return;
+            }
+
+            if (!esSoloNumeros(telefono) || telefono.length !== 9) {
+                marcarInputError("empresa-telefono");
+                mostrarModal({
+                    titulo: "Teléfono Inválido",
+                    mensaje: "El número de teléfono debe contener <b>9 dígitos</b>.",
+                    tipo: "warning"
+                });
+                return;
+            }
+
+            const boton = formEmpresas.querySelector('button[type="submit"]');
+
+            try {
+                boton.disabled = true;
+                boton.textContent = "Enviando...";
+
+                const idEmpresa = `${empresa}_${ruc}`
+                    .trim()
+                    .replace(/\s+/g, "_")
+                    .replace(/[\/.#$\[\]]/g, "")
+                    .toUpperCase();
+
+                await setDoc(
+                    doc(db, "solicitudes_empresas", idEmpresa),
+                    {
+                        ruc,
+                        empresa,
+                        contacto,
+                        cargo,
+                        correo,
+                        telefono,
+                        interes,
+                        fechaRegistro: serverTimestamp()
+                    }
+                );
+
+                mostrarModal({
+                    titulo: "¡Solicitud Enviada!",
+                    mensaje: "Hemos recibido tu información correctamente. Nos pondremos en contacto muy pronto.",
+                    tipo: "success"
+                });
+
+                formEmpresas.reset();
+
+            } catch (error) {
+                console.error("Error al guardar la solicitud:", error);
+                mostrarModal({
+                    titulo: "Error al enviar",
+                    mensaje: "Ocurrió un inconveniente al procesar tu solicitud. Por favor, inténtalo nuevamente.",
+                    tipo: "error"
+                });
+            } finally {
+                boton.disabled = false;
+                boton.innerHTML = "Solicitar información &rarr;";
+            }
+        });
     }
 
 });
