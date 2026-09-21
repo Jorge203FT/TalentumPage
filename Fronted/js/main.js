@@ -1,3 +1,17 @@
+/* ==========================================
+   FIREBASE / FIRESTORE
+========================================== */
+
+import { db } from "./firebase.js";
+
+import {
+    collection,
+    addDoc,
+    doc,
+    setDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
 document.addEventListener("DOMContentLoaded", () => {
 
     console.log("Talentum Selección iniciado correctamente");
@@ -754,5 +768,213 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCarousel();
 
     startAutoPlay();
+
+});
+
+/* ==========================================
+   FORMULARIOS - FIRESTORE
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* FORMULARIO EMPRESAS */
+
+    const formEmpresas = document.getElementById("form-empresas");
+
+    if (formEmpresas) {
+
+        formEmpresas.addEventListener("submit", async (event) => {
+
+            event.preventDefault();
+
+            const boton = formEmpresas.querySelector('button[type="submit"]');
+
+            const ruc = document.getElementById("empresa-ruc").value.trim();
+            const empresa = document.getElementById("empresa-nombre").value.trim();
+            const contacto = document.getElementById("empresa-contacto").value.trim();
+            const cargo = document.getElementById("empresa-cargo").value.trim();
+            const correo = document.getElementById("empresa-correo").value.trim();
+            const telefono = document.getElementById("empresa-telefono").value.trim();
+            const interes = document.getElementById("empresa-interes").value.trim();
+
+            try {
+
+                boton.disabled = true;
+                boton.textContent = "Enviando...";
+
+                const idEmpresa = `${empresa}_${ruc}`
+    .trim()
+    .replace(/\s+/g, "_")
+    .replace(/[\/.#$\[\]]/g, "")
+    .toUpperCase();
+
+await setDoc(
+    doc(db, "solicitudes_empresas", idEmpresa),
+    {
+        ruc,
+        empresa,
+        contacto,
+        cargo,
+        correo,
+        telefono,
+        interes,
+        fechaRegistro: serverTimestamp()
+    }
+                );
+
+                alert("Solicitud enviada correctamente.");
+
+                formEmpresas.reset();
+
+            } catch (error) {
+
+                console.error(
+                    "Error al guardar la solicitud:",
+                    error
+                );
+
+                alert(
+                    "No se pudo enviar la solicitud. Inténtalo nuevamente."
+                );
+
+            } finally {
+
+                boton.disabled = false;
+                boton.innerHTML = "Solicitar información &rarr;";
+
+            }
+
+        });
+
+    }
+
+
+    /* ==========================================
+   SELECCIONAR Y MOSTRAR CV
+========================================== */
+
+const inputCV = document.getElementById("cv-file");
+const nombreCV = document.getElementById("cv-file-name");
+
+if (inputCV && nombreCV) {
+
+    inputCV.addEventListener("change", () => {
+
+        const archivo = inputCV.files[0];
+
+        if (archivo) {
+
+            const extensionesPermitidas = [
+                "application/pdf",
+                "application/msword",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            ];
+
+            if (!extensionesPermitidas.includes(archivo.type)) {
+
+                alert("Solo puedes seleccionar archivos PDF, DOC o DOCX.");
+
+                inputCV.value = "";
+                nombreCV.textContent = "Cargar CV";
+
+                return;
+            }
+
+            nombreCV.textContent = archivo.name;
+
+        } else {
+
+            nombreCV.textContent = "Cargar CV";
+
+        }
+
+    });
+
+}
+
+    /* FORMULARIO CANDIDATOS */
+
+    const formCandidatos = document.getElementById("form-candidatos");
+
+    if (formCandidatos) {
+
+        formCandidatos.addEventListener("submit", async (event) => {
+
+            event.preventDefault();
+
+            const boton = formCandidatos.querySelector('button[type="submit"]');
+
+            const nombre = document.getElementById("candidato-nombre").value.trim();
+            const dni = document.getElementById("candidato-dni").value.trim();
+            const modalidad = document.getElementById("candidato-modalidad").value.trim();
+            const telefono = document.getElementById("candidato-telefono").value.trim();
+            const correo = document.getElementById("candidato-correo").value.trim();
+            const area = document.getElementById("candidato-area").value.trim();
+
+            const archivoCV = document.getElementById("cv-file");
+
+const cvNombre = archivoCV && archivoCV.files.length > 0
+    ? archivoCV.files[0].name
+    : "Sin CV";
+
+            try {
+
+                boton.disabled = true;
+                boton.textContent = "Enviando...";
+
+                const idCandidato = `${nombre}_${dni}`
+    .trim()
+    .replace(/\s+/g, "_")
+    .replace(/[\/.#$\[\]]/g, "")
+    .toUpperCase();
+
+await setDoc(
+    doc(db, "solicitudes_candidatos", idCandidato),
+    {
+        nombre,
+        dni,
+        modalidad,
+        telefono,
+        correo,
+        area,
+        cvNombre,
+        fechaRegistro: serverTimestamp()
+    }
+
+                
+          
+                );
+
+                alert("Registro enviado correctamente.");
+
+                formCandidatos.reset();
+
+                const nombreCV = document.getElementById("cv-file-name");
+
+                if (nombreCV) {
+                    nombreCV.textContent = "Cargar CV";
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Error al guardar candidato:",
+                    error
+                );
+
+                alert(
+                    "No se pudo enviar el registro. Inténtalo nuevamente."
+                );
+
+            } finally {
+
+                boton.disabled = false;
+                boton.innerHTML = "Enviar mi CV &rarr;";
+
+            }
+
+        });
+
+    }
 
 });

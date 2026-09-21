@@ -1271,91 +1271,270 @@
 </section>
 
         <!--Formularios-->
-        <section class="formularios-section">
-            <h2 class="section-title center main-contact-title">
-                Conversemos sobre el talento que tu empresa necesita para crecer
-            </h2>
+<section class="formularios-section">
 
-            <div class="forms-grid">
-                <!-- FORMULARIO 1: PARA EMPRESAS -->
-                <div class="form-card card-empresas" id="formulario-empresas">
-                    <span class="card-tag tag-teal">PARA EMPRESAS</span>
-                    <h3 class="card-title">¿Buscas talento para tu empresa?</h3>
-                    <p class="card-subtitle">Déjanos tus datos y te contactaremos.</p>
+    <h2 class="section-title center main-contact-title">
+        Conversemos sobre el talento que tu empresa necesita para crecer
+    </h2>
 
-                    <form class="custom-form" onsubmit="return false;">
-                        <div class="form-row">
-                            <input type="text" placeholder="RUC de la empresa">
-                            <input type="text" placeholder="Nombre de la empresa">
-                        </div>
-                        <div class="form-row">
-                            <input type="text" placeholder="Nombre de contacto">
-                            <input type="text" placeholder="Cargo">
-                        </div>
-                        <div class="form-row full-width">
-                            <input type="email" placeholder="Correo corporativo">
-                        </div>
-                        <div class="form-row full-width">
-                            <input type="tel" placeholder="Teléfono corporativo">
-                        </div>
-                        <div class="form-row full-width">
-                            <input type="text" placeholder="¿En qué está interesado?">
-                        </div>
-                        <button type="button" class="form-btn btn-dark-blue">
-                            Solicitar información &rarr;
-                        </button>
-                    </form>
+    <div class="forms-grid">
+
+        <!-- =========================================
+             FORMULARIO 1: PARA EMPRESAS
+        ========================================== -->
+
+        <div class="form-card card-empresas" id="formulario-empresas">
+
+            <span class="card-tag tag-teal">
+                PARA EMPRESAS
+            </span>
+
+            <h3 class="card-title">
+                ¿Buscas talento para tu empresa?
+            </h3>
+
+            <p class="card-subtitle">
+                Déjanos tus datos y te contactaremos.
+            </p>
+
+
+            <form class="custom-form" id="form-empresas">
+
+                <!-- RUC + EMPRESA -->
+                <div class="form-row">
+
+                    <input
+                        type="text"
+                        id="empresa-ruc"
+                        placeholder="RUC de la empresa"
+                        required
+                    >
+
+                    <input
+                        type="text"
+                        id="empresa-nombre"
+                        placeholder="Nombre de la empresa"
+                        required
+                    >
+
                 </div>
 
-                <!-- FORMULARIO 2: PARA CANDIDATOS -->
-                <div class="form-card card-candidatos" id="formulario-candidatos">
-                    <span class="card-tag tag-purple">PARA CANDIDATOS</span>
-                    <h3 class="card-title">¿Buscas dar tu siguiente paso?</h3>
-                    <p class="card-subtitle">Regístrate en nuestra bolsa de trabajo.</p>
 
-                    <form class="custom-form" onsubmit="return false;">
-                        <div class="form-row flex-70-30">
-                            <input type="text" placeholder="Nombre completo">
-                            <input type="text" placeholder="DNI">
-                        </div>
-                        <div class="form-row full-width">
-                            <input type="text" placeholder="Modalidad de trabajo">
-                        </div>
-                        <div class="form-row full-width">
-                            <input type="tel" placeholder="Teléfono">
-                        </div>
-                        <div class="form-row full-width">
-                            <input type="email" placeholder="Correo electrónico">
-                        </div>
-                        <div class="form-row flex-equal">
-                            <div class="select-wrapper">
-                                <input type="text" placeholder="Área de interes">
-                                <i class="fa-solid fa-chevron-down select-icon"></i>
-                            </div>
-                            <div class="file-wrapper" onclick="document.getElementById('cv-file').click()">
+                <!-- CONTACTO + CARGO -->
+                <div class="form-row">
 
-                            <input
-                              type="file"
-                              id="cv-file"
-                              accept=".pdf,.doc,.docx"
-                              hidden
-                                >
+                    <input
+                        type="text"
+                        id="empresa-contacto"
+                        placeholder="Nombre de contacto"
+                        required
+                    >
 
-                             <span class="file-placeholder" id="cv-file-name">
-                             Cargar CV
-                             </span>
+                    <input
+                        type="text"
+                        id="empresa-cargo"
+                        placeholder="Cargo"
+                        required
+                    >
 
-                             <i class="fa-solid fa-upload upload-icon"></i>
-
-                              </div>
-                        </div>
-                        <button type="button" class="form-btn btn-purple">
-                            Enviar mi CV &rarr;
-                        </button>
-                    </form>
                 </div>
-            </div>
-        </section>
+
+
+                <!-- CORREO -->
+                <div class="form-row full-width">
+
+                    <input
+                        type="email"
+                        id="empresa-correo"
+                        placeholder="Correo corporativo"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- TELÉFONO -->
+                <div class="form-row full-width">
+
+                    <input
+                        type="tel"
+                        id="empresa-telefono"
+                        placeholder="Teléfono corporativo"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- INTERÉS -->
+                <div class="form-row full-width">
+
+                    <input
+                        type="text"
+                        id="empresa-interes"
+                        placeholder="¿En qué está interesado?"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- BOTÓN -->
+                <button
+                    type="submit"
+                    class="form-btn btn-dark-blue"
+                >
+                    Solicitar información &rarr;
+                </button>
+
+            </form>
+
+        </div>
+
+
+
+        <!-- =========================================
+             FORMULARIO 2: PARA CANDIDATOS
+        ========================================== -->
+
+        <div class="form-card card-candidatos" id="formulario-candidatos">
+
+            <span class="card-tag tag-purple">
+                PARA CANDIDATOS
+            </span>
+
+            <h3 class="card-title">
+                ¿Buscas dar tu siguiente paso?
+            </h3>
+
+            <p class="card-subtitle">
+                Regístrate en nuestra bolsa de trabajo.
+            </p>
+
+
+            <form class="custom-form" id="form-candidatos">
+
+
+                <!-- NOMBRE + DNI -->
+                <div class="form-row flex-70-30">
+
+                    <input
+                        type="text"
+                        id="candidato-nombre"
+                        placeholder="Nombre completo"
+                        required
+                    >
+
+                    <input
+                        type="text"
+                        id="candidato-dni"
+                        placeholder="DNI"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- MODALIDAD -->
+                <div class="form-row full-width">
+
+                    <input
+                        type="text"
+                        id="candidato-modalidad"
+                        placeholder="Modalidad de trabajo"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- TELÉFONO -->
+                <div class="form-row full-width">
+
+                    <input
+                        type="tel"
+                        id="candidato-telefono"
+                        placeholder="Teléfono"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CORREO -->
+                <div class="form-row full-width">
+
+                    <input
+                        type="email"
+                        id="candidato-correo"
+                        placeholder="Correo electrónico"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ÁREA + CV -->
+                <div class="form-row flex-equal">
+
+
+                    <!-- ÁREA DE INTERÉS -->
+                    <div class="select-wrapper">
+
+                        <input
+                            type="text"
+                            id="candidato-area"
+                            placeholder="Área de interes"
+                            required
+                        >
+
+                        <i class="fa-solid fa-chevron-down select-icon"></i>
+
+                    </div>
+
+
+                    <!-- CARGAR CV -->
+                    <div
+                        class="file-wrapper"
+                        onclick="document.getElementById('cv-file').click()"
+                    >
+
+                        <input
+                            type="file"
+                            id="cv-file"
+                            accept=".pdf,.doc,.docx"
+                            hidden
+                        >
+
+                        <span
+                            class="file-placeholder"
+                            id="cv-file-name"
+                        >
+                            Cargar CV
+                        </span>
+
+                        <i class="fa-solid fa-upload upload-icon"></i>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BOTÓN -->
+                <button
+                    type="submit"
+                    class="form-btn btn-purple"
+                >
+                    Enviar mi CV &rarr;
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
 
         <!--Footer-->
         <footer class="footer" id="contacto">
@@ -1419,7 +1598,7 @@
          JAVASCRIPT
     ========================== -->
 
-    <script src="js/main.js"></script>
+    <script type="module" src="js/main.js"></script>
 
 
 </body>
