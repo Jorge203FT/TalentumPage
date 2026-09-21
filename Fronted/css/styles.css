@@ -2892,7 +2892,7 @@ html {
 }
 
 /* Campo Select personalizado */
-.select-wrapper {
+.select-wrapper select {
     position: relative;
     width: 100%;
 }
@@ -3052,6 +3052,62 @@ html {
 .modal-btn:hover {
     background-color: #6548f4;
     transform: translateY(-1px);
+}
+
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.select-wrapper select.custom-select {
+    width: 100%;
+    height: 48px;
+    padding: 0 40px 0 18px;
+    border: 1px solid #e1dbec;
+    border-radius: 8px;
+    background-color: #ffffff;
+    font-size: 13px;
+    color: #0b2f67; /* Texto seleccionado */
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    -webkit-appearance: none;
+}
+
+.select-wrapper select.custom-select:focus {
+    border-color: #7047ef;
+    box-shadow: 0 0 0 3px rgba(112, 71, 239, 0.1);
+}
+
+.select-wrapper select.custom-select:invalid {
+    color: #9cb0ce;
+}
+
+.select-wrapper .select-icon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7047ef; /* Color morado de tu marca */
+    font-size: 12px;
+    pointer-events: none; /* Permite hacer clic en el select a través de la flecha */
+}
+
+.select-wrapper select.custom-select option {
+    background-color: #ffffff;
+    color: #0b2f67;
+    font-size: 13px;
+    padding: 12px 18px; /* Espaciado entre opciones */
+}
+
+.select-wrapper select.custom-select option:checked {
+    background-color: #f3ebff !important;
+    color: #7047ef !important;
+    font-weight: 600;
+}
+
+.select-wrapper select.custom-select option[value=""][disabled] {
+    color: #9cb0ce;
 }
 
 /* ==========================================
