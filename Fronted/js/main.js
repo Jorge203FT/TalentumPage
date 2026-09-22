@@ -166,112 +166,90 @@ navLinks.forEach((link) => {
        CONTADORES ANIMADOS - MÉTRICAS
     =========================================== */
 
-    const counters =
-        document.querySelectorAll(".counter");
+    const counters = document.querySelectorAll(".counter");
 
+function animateCounter(counter) {
 
-    counters.forEach((counter) => {
+    const target = Number(counter.dataset.target);
+    const prefix = counter.dataset.prefix || "";
+    const suffix = counter.dataset.suffix || "";
 
-        // Número final
-        const target =
-            Number(counter.dataset.target);
+    const duration = 900;
+    const startValue = 0;
 
-        // Signos + y %
-        const prefix =
-            counter.dataset.prefix || "";
+    let startTime = null;
 
-        const suffix =
-            counter.dataset.suffix || "";
+    function updateCounter(currentTime) {
 
-        // Duración de la animación
-        // 900 = 0.9 segundos
-        const duration = 900;
-
-        // Comenzamos desde 1
-        const startValue = 1;
-
-        let startTime = null;
-
-
-        function animateCounter(currentTime) {
-
-            if (!startTime) {
-
-                startTime = currentTime;
-
-            }
-
-
-            // Progreso entre 0 y 1
-            const progress = Math.min(
-
-                (currentTime - startTime) / duration,
-
-                1
-
-            );
-
-
-            // Animación suave y rápida
-            const easeOut =
-                1 - Math.pow(1 - progress, 3);
-
-
-            // Calculamos el número actual
-            const currentValue =
-                Math.floor(
-
-                    startValue +
-                    (target - startValue) *
-                    easeOut
-
-                );
-
-
-            // Formato del número
-            const formattedValue =
-                currentValue.toLocaleString("en-US");
-
-
-            // Mostramos el resultado
-            counter.textContent =
-
-                prefix +
-                formattedValue +
-                suffix;
-
-
-            // Continuamos hasta llegar
-            // al número final
-            if (progress < 1) {
-
-                requestAnimationFrame(
-                    animateCounter
-                );
-
-            } else {
-
-                // Terminamos exactamente
-                // en el número indicado
-
-                counter.textContent =
-
-                    prefix +
-                    target.toLocaleString("en-US") +
-                    suffix;
-
-            }
-
+        if (!startTime) {
+            startTime = currentTime;
         }
 
-
-        // Iniciar animación
-        requestAnimationFrame(
-            animateCounter
+        const progress = Math.min(
+            (currentTime - startTime) / duration,
+            1
         );
 
-    });
+        const easeOut = 1 - Math.pow(1 - progress, 3);
 
+        const currentValue = Math.floor(
+            startValue + (target - startValue) * easeOut
+        );
+
+        counter.textContent =
+            prefix +
+            currentValue.toLocaleString("en-US") +
+            suffix;
+
+        if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+        } else {
+            counter.textContent =
+                prefix +
+                target.toLocaleString("en-US") +
+                suffix;
+        }
+    }
+
+    requestAnimationFrame(updateCounter);
+}
+
+
+/* Detectar cuando los números aparecen en pantalla */
+
+const counterObserver = new IntersectionObserver(
+    (entries, observer) => {
+
+        entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+                animateCounter(entry.target);
+
+                // Se ejecuta una sola vez
+                observer.unobserve(entry.target);
+            }
+
+        });
+
+    },
+    {
+        threshold: 0.4
+    }
+);
+
+
+/* Dejarlos en 0 hasta que aparezcan */
+
+counters.forEach((counter) => {
+
+    const prefix = counter.dataset.prefix || "";
+    const suffix = counter.dataset.suffix || "";
+
+    counter.textContent = prefix + "0" + suffix;
+
+    counterObserver.observe(counter);
+});
 
 
     /* ==========================================
@@ -1170,6 +1148,18 @@ document.querySelectorAll(".menu-servicio-modal").forEach((link) => {
     link.addEventListener("click", function (e) {
         e.preventDefault();
 
+        // CERRAR EL MENÚ DESPLEGABLE DE SERVICIOS
+        const dropdown = this.closest(".services-dropdown");
+
+        if (dropdown) {
+            dropdown.style.display = "none";
+
+            // Permite que vuelva a funcionar al pasar nuevamente el mouse
+            setTimeout(() => {
+                dropdown.style.display = "";
+            }, 300);
+        }
+
         const servicioId = this.dataset.servicio;
         const tarjeta = document.getElementById(servicioId);
 
@@ -1194,4 +1184,57 @@ document.querySelectorAll(".menu-servicio-modal").forEach((link) => {
         }, 500);
     });
 
+});
+
+/* ==========================================
+   CURSOR MORADO PERSONALIZADO
+========================================== */
+
+const purpleCursor = document.createElement("div");
+purpleCursor.classList.add("cursor-purple", "hidden");
+
+document.body.appendChild(purpleCursor);
+
+
+/* Seguir al mouse */
+document.addEventListener("mousemove", (e) => {
+
+    purpleCursor.style.left = `${e.clientX}px`;
+    purpleCursor.style.top = `${e.clientY}px`;
+
+    purpleCursor.classList.remove("hidden");
+
+});
+
+
+/* Detectar elementos clickeables dinámicamente */
+document.addEventListener("mouseover", (e) => {
+
+    if (
+        e.target.closest(
+            "a, button, .solution-card, .nav-link, .btn, [role='button']"
+        )
+    ) {
+        purpleCursor.classList.add("hover");
+    }
+
+});
+
+
+document.addEventListener("mouseout", (e) => {
+
+    if (
+        e.target.closest(
+            "a, button, .solution-card, .nav-link, .btn, [role='button']"
+        )
+    ) {
+        purpleCursor.classList.remove("hover");
+    }
+
+});
+
+
+/* Si el mouse sale de la ventana */
+document.addEventListener("mouseleave", () => {
+    purpleCursor.classList.add("hidden");
 });

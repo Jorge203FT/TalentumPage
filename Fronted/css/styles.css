@@ -4282,3 +4282,61 @@ html {
 .footer-content {
     gap: 25px 22px;
 }
+
+/* ==========================================
+   CURSOR PERSONALIZADO MORADO - PC
+========================================== */
+
+.cursor-purple {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 24px;
+    height: 24px;
+
+    /* Normal: círculo vacío */
+    background: transparent;
+    border: 1.5px solid #6c45ff;
+    border-radius: 50%;
+
+    pointer-events: none;
+    z-index: 999999;
+
+    transform: translate(-50%, -50%);
+
+    transition:
+        width 0.18s ease,
+        height 0.18s ease,
+        background-color 0.18s ease,
+        border-color 0.18s ease;
+
+    /* Importante para que no bloquee clicks */
+    user-select: none;
+}
+
+
+/* Cuando pasa por enlaces, botones, etc. */
+.cursor-purple.hover {
+    width: 32px;
+    height: 32px;
+
+    background: rgba(108, 69, 255, 0.28);
+    border-color: rgba(108, 69, 255, 0.45);
+}
+
+
+/* Ocultarlo cuando el mouse sale de la página */
+.cursor-purple.hidden {
+    opacity: 0;
+}
+
+
+/* NO mostrar en celulares */
+@media (hover: none), (pointer: coarse) {
+
+    .cursor-purple {
+        display: none !important;
+    }
+
+}
