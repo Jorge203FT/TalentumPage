@@ -1074,37 +1074,58 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    //Desplegables Servicios
-    const toggleButtons = document.querySelectorAll('.btn-toggle-details');
+    //Sección de servicios
+    const modalServicio = document.getElementById("modal-servicio-detalle");
+    const modalTitulo = document.getElementById("modal-servicio-titulo");
+    const modalIcono = document.getElementById("modal-servicio-icono");
+    const modalContenido = document.getElementById("modal-servicio-contenido");
+    const btnCerrar = document.getElementById("btn-cerrar-modal-servicio");
+    const btnContacto = document.getElementById("modal-servicio-contacto");
 
-    toggleButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const currentCard = button.closest('.solution-card');
-            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    // Evento en cada botón "Conoce más"
+    const botonesConocerMas = document.querySelectorAll(".btn-open-service-modal");
 
-            // Opcional: Si deseas cerrar las otras tarjetas abiertas al abrir una nueva
-            document.querySelectorAll('.solution-card').forEach(card => {
-                if (card !== currentCard) {
-                    card.classList.remove('active');
-                    const otherBtn = card.querySelector('.btn-toggle-details');
-                    if (otherBtn) {
-                        otherBtn.setAttribute('aria-expanded', 'false');
-                        otherBtn.querySelector('.btn-text').textContent = 'Conoce más';
-                    }
-                }
-            });
+    botonesConocerMas.forEach((boton) => {
+        boton.addEventListener("click", () => {
+            const tarjeta = boton.closest(".solution-card");
+            if (!tarjeta) return;
 
-            // Alternar estado de la tarjeta clickeada
-            if (isExpanded) {
-                currentCard.classList.remove('active');
-                button.setAttribute('aria-expanded', 'false');
-                button.querySelector('.btn-text').textContent = 'Conoce más';
-            } else {
-                currentCard.classList.add('active');
-                button.setAttribute('aria-expanded', 'true');
-                button.querySelector('.btn-text').textContent = 'Ver menos';
+            // Extraer datos de la tarjeta actual
+            const titulo = tarjeta.querySelector("h3")?.innerHTML || "Servicio";
+            const iconoHTML = tarjeta.querySelector(".solution-icon")?.innerHTML || "";
+            const iconoClases = tarjeta.querySelector(".solution-icon")?.className || "solution-icon";
+            const plantilla = tarjeta.querySelector(".service-details-data");
+
+            // Cargar datos en el modal
+            if (modalTitulo) modalTitulo.innerHTML = titulo;
+            if (modalIcono) {
+                modalIcono.className = iconoClases;
+                modalIcono.innerHTML = iconoHTML;
             }
+            if (modalContenido && plantilla) {
+                modalContenido.innerHTML = plantilla.innerHTML;
+            }
+
+            // Mostrar Modal
+            if (modalServicio) modalServicio.classList.add("active");
         });
     });
+
+    // Función para cerrar el modal
+    function cerrarModalServicio() {
+        if (modalServicio) modalServicio.classList.remove("active");
+    }
+
+    if (btnCerrar) btnCerrar.addEventListener("click", cerrarModalServicio);
+    if (btnContacto) btnContacto.addEventListener("click", cerrarModalServicio);
+
+    // Cerrar al hacer clic en el fondo oscuro
+    if (modalServicio) {
+        modalServicio.addEventListener("click", (e) => {
+            if (e.target === modalServicio) {
+                cerrarModalServicio();
+            }
+        });
+    }
 
 });

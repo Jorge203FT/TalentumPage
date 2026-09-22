@@ -1643,7 +1643,7 @@ html {
 }
 
 /* ==================================================
-   ÁREA DESPLEGABLE DE INFORMACIÓN DETALLADA
+   Estilos de la información del modal
 ================================================== */
 .solution-details {
     max-height: 0;
@@ -1760,6 +1760,26 @@ html {
 
 .btn-action:hover {
     background-color: #5032e6;
+}
+
+.modal-close-icon {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+    color: #64748b;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    outline: none;
+    z-index: 10;
 }
 
 /* ==================================================
@@ -2223,6 +2243,134 @@ html {
 .step-7 .step-number { background-color: #0ea5e9; }
 .step-7 .step-icon { background-color: #e0f2fe; }
 
+/*Responsive Sección Proceso*/
+@media (max-width: 900px) {
+
+    .proceso {
+        padding: 50px 40px;
+    }
+
+    .proceso .section-title {
+        font-size: 36px;
+    }
+
+    .stepper-line {
+        display: none;
+    }
+
+    .stepper-wrapper {
+        overflow-x: visible;
+        padding: 0;
+    }
+
+    /* Cambio del flujo horizontal a columna vertical */
+    .stepper {
+        flex-direction: column;
+        min-width: 100%;
+        gap: 12px;
+    }
+
+    /* Formato de tarjeta limpia en vertical */
+    .step {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        gap: 16px;
+        padding: 16px 22px;
+        border-radius: 14px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .step-number {
+        margin-bottom: 0;
+        font-size: 14px;
+        padding: 6px 10px;
+        flex-shrink: 0;
+    }
+
+    .step-icon {
+        margin-bottom: 0;
+        font-size: 22px;
+        flex-shrink: 0;
+    }
+
+    .step-content {
+        align-items: flex-start;
+    }
+
+    .step-content strong {
+        font-size: 16px;
+    }
+
+    .step-content span {
+        font-size: 14px;
+    }
+
+    /* Rotación de flechas hacia abajo */
+    .step-arrow {
+        transform: rotate(90deg);
+        margin: 2px 0;
+        font-size: 14px;
+    }
+}
+
+
+/* =========================
+    CELULAR (550px)
+========================= */
+
+@media (max-width: 550px) {
+
+    .proceso {
+        padding: 45px 22px;
+    }
+
+    .proceso .section-tag {
+        font-size: 12px;
+    }
+
+    .proceso .section-title {
+        font-size: 31px;
+        line-height: 1.08;
+    }
+
+    .proceso .section-subtitle {
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+    .stepper {
+        gap: 10px;
+    }
+
+    .step {
+        padding: 14px 18px;
+        gap: 14px;
+        border-radius: 12px;
+    }
+
+    .step-number {
+        font-size: 13px;
+    }
+
+    .step-icon {
+        font-size: 20px;
+    }
+
+    .step-content strong {
+        font-size: 15px;
+    }
+
+    .step-content span {
+        font-size: 13px;
+    }
+
+    .step-arrow {
+        font-size: 13px;
+        margin: 0;
+    }
+}
 
 /* =========================
    DESAFÍOS DEL MERCADO
