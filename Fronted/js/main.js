@@ -788,6 +788,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function mostrarModal({ titulo, mensaje, tipo = "warning" }) {
         if (!modalOverlay) return;
 
+        const conexaPromo = document.getElementById("modal-conexa-promo");
+
         modalTitle.textContent = titulo;
         modalMessage.innerHTML = mensaje;
 
@@ -797,12 +799,20 @@ document.addEventListener("DOMContentLoaded", () => {
         // Cambiar icono según el tipo de respuesta
         if (tipo === "success") {
             modalIconSymbol.className = "fa-solid fa-circle-check";
+            if (conexaPromo) {
+                conexaPromo.style.display = "block";
+            }conexaPromo.style.display = "block"
         } else if (tipo === "error") {
             modalIconSymbol.className = "fa-solid fa-circle-xmark";
+            if (conexaPromo){
+                conexaPromo.style.display = "none";
+            }
         } else {
             modalIconSymbol.className = "fa-solid fa-triangle-exclamation";
+            if (conexaPromo){
+                conexaPromo.style.display = "none";
+            }
         }
-
         modalOverlay.classList.add("active");
     }
 
@@ -844,42 +854,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-
-    /* ==========================================
-       SELECCIONAR Y MOSTRAR CV (CANDIDATOS)
-    ========================================== */
-    const inputCV = document.getElementById("cv-file");
-    const nombreCV = document.getElementById("cv-file-name");
-
-    if (inputCV && nombreCV) {
-        inputCV.addEventListener("change", () => {
-            const archivo = inputCV.files[0];
-
-            if (archivo) {
-                const extensionesPermitidas = [
-                    "application/pdf",
-                    "application/msword",
-                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                ];
-
-                if (!extensionesPermitidas.includes(archivo.type)) {
-                    mostrarModal({
-                        titulo: "Formato de archivo inválido",
-                        mensaje: "Solo se admiten documentos en formato <b>PDF, DOC o DOCX</b>.",
-                        tipo: "warning"
-                    });
-                    inputCV.value = "";
-                    nombreCV.textContent = "Cargar CV";
-                    return;
-                }
-
-                nombreCV.textContent = archivo.name;
-            } else {
-                nombreCV.textContent = "Cargar CV";
-            }
-        });
-    }
-
     /* ==========================================
        FORMULARIO CANDIDATOS
     ========================================== */
@@ -896,7 +870,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const telefono = document.getElementById("candidato-telefono")?.value.trim() || "";
             const correo = document.getElementById("candidato-correo")?.value.trim() || "";
             const area = document.getElementById("candidato-area")?.value.trim() || "";
-            const archivoCV = document.getElementById("cv-file");
 
             /* --- VALIDACIONES DE CAMPOS --- */
             if (!nombre || !dni || !modalidad || !telefono || !correo || !area) {
@@ -948,17 +921,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Validar que se haya subido el archivo CV obligatorio
-            if (!archivoCV || archivoCV.files.length === 0) {
-                mostrarModal({
-                    titulo: "CV Obligatorio",
-                    mensaje: "Por favor, adjunta tu currículum vitae antes de enviar la solicitud.",
-                    tipo: "warning"
-                });
-                return;
-            }
-
-            const cvNombre = archivoCV.files[0].name;
             const boton = formCandidatos.querySelector('button[type="submit"]');
 
             try {
@@ -980,7 +942,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         telefono,
                         correo,
                         area,
-                        cvNombre,
                         fechaRegistro: serverTimestamp()
                     }
                 );
@@ -993,10 +954,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 formCandidatos.reset();
 
-                if (nombreCV) {
-                    nombreCV.textContent = "Cargar CV";
-                }
-
             } catch (error) {
                 console.error("Error al guardar candidato:", error);
                 mostrarModal({
@@ -1006,7 +963,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             } finally {
                 boton.disabled = false;
-                boton.innerHTML = "Enviar mi CV &rarr;";
+                boton.innerHTML = "Enviar mi Información &rarr;";
             }
         });
     }
@@ -1116,5 +1073,38 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    //Desplegables Servicios
+    const toggleButtons = document.querySelectorAll('.btn-toggle-details');
+
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const currentCard = button.closest('.solution-card');
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+            // Opcional: Si deseas cerrar las otras tarjetas abiertas al abrir una nueva
+            document.querySelectorAll('.solution-card').forEach(card => {
+                if (card !== currentCard) {
+                    card.classList.remove('active');
+                    const otherBtn = card.querySelector('.btn-toggle-details');
+                    if (otherBtn) {
+                        otherBtn.setAttribute('aria-expanded', 'false');
+                        otherBtn.querySelector('.btn-text').textContent = 'Conoce más';
+                    }
+                }
+            });
+
+            // Alternar estado de la tarjeta clickeada
+            if (isExpanded) {
+                currentCard.classList.remove('active');
+                button.setAttribute('aria-expanded', 'false');
+                button.querySelector('.btn-text').textContent = 'Conoce más';
+            } else {
+                currentCard.classList.add('active');
+                button.setAttribute('aria-expanded', 'true');
+                button.querySelector('.btn-text').textContent = 'Ver menos';
+            }
+        });
+    });
 
 });
