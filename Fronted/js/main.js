@@ -1106,6 +1106,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 modalContenido.innerHTML = plantilla.innerHTML;
             }
 
+            
+
             // Mostrar Modal
             if (modalServicio) modalServicio.classList.add("active");
         });
@@ -1127,5 +1129,69 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+});
+
+/* ==========================================
+   ELEMENTOS APARECEN AL HACER SCROLL
+========================================== */
+
+const revealElements = document.querySelectorAll(
+    ".hero-content, .hero-buttons, .stat-item, section, .solution-card, .stepper"
+);
+
+revealElements.forEach((element) => {
+    element.classList.add("reveal");
+});
+
+const revealObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+            }
+        });
+    },
+    {
+        threshold: 0.15
+    }
+);
+
+revealElements.forEach((element) => {
+    revealObserver.observe(element);
+});
+
+/* ==========================================
+   ABRIR MODAL DESDE MENÚ SERVICIOS
+========================================== */
+
+document.querySelectorAll(".menu-servicio-modal").forEach((link) => {
+
+    link.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const servicioId = this.dataset.servicio;
+        const tarjeta = document.getElementById(servicioId);
+
+        if (!tarjeta) return;
+
+        // Ir suavemente hasta la tarjeta
+        tarjeta.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+        // Abrir el mismo modal del botón "Conoce más"
+        setTimeout(() => {
+
+            const botonModal =
+                tarjeta.querySelector(".btn-open-service-modal");
+
+            if (botonModal) {
+                botonModal.click();
+            }
+
+        }, 500);
+    });
 
 });

@@ -64,11 +64,51 @@
                 </a>
             </li>
 
-            <li>
-                <a href="#servicios">
-                    Servicios
-                </a>
-            </li>
+           <!-- SERVICIOS CON MENÚ DESPLEGABLE -->
+<li class="nav-services">
+
+    <a href="#servicios" class="services-link">
+        Servicios
+    </a>
+
+    <div class="services-dropdown">
+
+        <a href="#servicio-procesos-masivos"
+   class="dropdown-service menu-servicio-modal"
+   data-servicio="servicio-procesos-masivos">
+            <span class="dropdown-icon icon-masivos">
+                <i class="fa-solid fa-users"></i>
+            </span>
+
+            <span>Procesos Masivos</span>
+        </a>
+
+        <a href="#servicio-rpo"
+   class="dropdown-service menu-servicio-modal"
+   data-servicio="servicio-rpo">
+            <span class="dropdown-icon icon-rpo">
+                <i class="fa-solid fa-gear"></i>
+            </span>
+
+            <span>RPO</span>
+        </a>
+
+        <a href="#servicio-busqueda"
+   class="dropdown-service menu-servicio-modal"
+   data-servicio="servicio-busqueda">
+            <span class="dropdown-icon icon-busqueda">
+                <i class="fa-solid fa-bullseye"></i>
+            </span>
+
+            <span>
+                Búsqueda Especializada<br>
+                & Executive Search
+            </span>
+        </a>
+
+    </div>
+
+</li>
 
             <li>
                 <a href="#proceso">
@@ -149,6 +189,12 @@
                    <a href="#formulario-candidatos" class="btn btn-outline">
                     Para Candidatos ↓
                    </a>
+
+                      <!-- BOTÓN CONEXA -->
+                     <a href="#" class="btn btn-conexa" onclick="return false;">
+                     Ir a Conexa →
+                    </a>
+
 
 
                 </div>
@@ -732,7 +778,7 @@
             <!-- TARJETAS DE SERVICIOS -->
     <div class="solutions-cards">
         <!-- TARJETA 1 -->
-        <article class="solution-card">
+        <article class="solution-card" id="servicio-procesos-masivos">
             <div class="solution-card-main">
                 <div class="solution-image">
                     <img src="assets/images/atraccion-seleccion.png" alt="Procesos Masivos">
@@ -774,7 +820,7 @@
         </article>
 
         <!-- TARJETA 2 -->
-        <article class="solution-card">
+        <article class="solution-card" id="servicio-rpo">
             <div class="solution-card-main">
                 <div class="solution-image">
                     <img src="assets/images/capacitacion-desarrollo.png" alt="RPO">
@@ -823,7 +869,7 @@
         </article>
 
         <!-- TARJETA 3 -->
-        <article class="solution-card">
+        <article class="solution-card" id="servicio-busqueda">
             <div class="solution-card-main">
                 <div class="solution-image">
                     <img src="assets/images/evaluacion-competencias.png" alt="Búsqueda Especializada & Executive Search">
@@ -887,6 +933,7 @@
         </div>
     </div>
 
+
 </section>
 
         <!--Sección - Nuestro Proceso-->
@@ -902,7 +949,7 @@
                     <div class="step step-1">
                         <div class="step-number">01</div>
                         <div class="step-icon">
-                            <i class="fa-solid fa-file-magnifying-glass"></i>
+                            <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                         <div class="step-content">
                             <strong>Entendemos</strong>

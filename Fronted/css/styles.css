@@ -2120,7 +2120,7 @@ html {
 ========================= */
 .stepper-wrapper {
     position: relative;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 10px 0;
     overflow-x: auto; /* Permite scroll horizontal en pantallas muy pequeñas sin romper el diseño */
@@ -2151,35 +2151,35 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 120px;
+    width: 145px;
 }
 
 /* Números superiores */
 .step-number {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 15px;
-    box-shadow: 0 0 0 4px #ffffff; /* Separación blanca con la línea de fondo */
+    margin-bottom: 18px;
+    box-shadow: 0 0 0 4px #ffffff;
 }
 
 /* Círculos con ícono */
 .step-icon {
-    width: 70px;
-    height: 70px;
+    width: 88px;
+    height: 88px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
+    font-size: 32px;
     color: #0b2f67;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     transition: transform 0.3s ease;
 }
 
@@ -2192,17 +2192,20 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 13px;
+    font-size: 16px;
     color: #0b2f67;
-    line-height: 1.3;
+    line-height: 1.35;
+    text-align: center;
 }
 
 .step-content strong {
     font-weight: 700;
+    font-size: 16px;
 }
 
 .step-content span {
     font-weight: 400;
+    font-size: 15px;
     color: #4a5568;
 }
 
@@ -3053,81 +3056,247 @@ html {
 @media (max-width: 650px) {
 
     /* ==========================================
-       NUESTRO PROCESO - CELULAR
-       3 ARRIBA + 2 ABAJO
+       PORTADA / HERO - CELULAR
     ========================================== */
 
-    .stepper {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        width: 100%;
-        max-width: 100%;
-        margin-top: 40px;
-        gap: 35px 5px;
-        align-items: start;
+    .hero {
+        min-height: auto;
     }
 
-    /* Quitamos la línea en celular */
-    .stepper-line {
-        display: none;
+   .hero-content {
+    padding-top: 55px;
+    padding-bottom: 25px;
+     }
+
+     .hero-text {
+      margin-top: 0;
+     }
+
+     .hero-text h1 {
+       margin-top: 0;
+      margin-bottom: 22px;
+     }
+
+     .hero-buttons {
+        margin-top: 15px !important;
+        margin-bottom: 20px !important;
     }
 
-    .step {
+    .nav-services {
         width: 100%;
-        display: flex;
-        flex-direction: column;
+        position: relative;
+    }
+
+    /* Por defecto NO ocupa espacio */
+    .nav-services .services-dropdown {
+        display: none !important;
+
+        position: static !important;
+        width: 100% !important;
+
+        margin: 8px 0 0 !important;
+        padding: 8px 15px !important;
+
+        background: #f7f8ff !important;
+        border-radius: 10px !important;
+        box-shadow: none !important;
+
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* Al tocar/pasar por Servicios aparecen las opciones */
+    .nav-services:hover .services-dropdown,
+    .nav-services:focus-within .services-dropdown {
+        display: block !important;
+    }
+
+    /* Cada opción */
+    .nav-services .dropdown-service {
+        display: flex !important;
         align-items: center;
-        text-align: center;
+        gap: 12px;
+
+        width: 100%;
+        padding: 12px 8px !important;
+        margin: 0 !important;
+
+        font-size: 14px;
     }
 
-    /* 3 PRIMEROS ARRIBA */
-
-    .step:nth-of-type(2) {
-        grid-column: 1 / 3;
+    /* Separación entre opciones */
+    .nav-services .dropdown-service + .dropdown-service {
+        margin-top: 4px !important;
     }
 
-    .step:nth-of-type(3) {
-        grid-column: 3 / 5;
-    }
+    
 
-    .step:nth-of-type(4) {
-        grid-column: 5 / 7;
-    }
+    /* ==========================================
+   NUESTRO PROCESO - CELULAR
+   DISTRIBUCIÓN 3 + 3 + 1
+========================================== */
 
-    /* 2 ÚLTIMOS ABAJO Y CENTRADOS */
+.proceso .stepper {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
 
-    .step:nth-of-type(5) {
-        grid-column: 2 / 4;
-    }
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
 
-    .step:nth-of-type(6) {
-        grid-column: 4 / 6;
-    }
+    margin-top: 35px;
 
-    /* NÚMEROS */
+    column-gap: 8px;
+    row-gap: 25px;
 
-    .step-number {
-        width: 36px;
-        height: 36px;
-        margin-bottom: 15px;
-        font-size: 13px;
-    }
+    align-items: start;
+}
 
-    /* ICONOS */
 
-    .step-icon {
-        height: 42px;
-        margin-bottom: 10px;
-        font-size: 32px;
-    }
+/* ==========================================
+   QUITAMOS LA LÍNEA DE ESCRITORIO
+========================================== */
 
-    /* TEXTO */
+.proceso .stepper-line {
+    display: none;
+}
 
-    .step-label {
-        font-size: 13px;
-        line-height: 1.2;
-        text-align: center;
-    }
+
+/* ==========================================
+   CADA PASO
+========================================== */
+
+.proceso .step {
+    /* Cada paso ocupa 2 columnas:
+       3 pasos por fila */
+    grid-column: span 2;
+
+    width: 100%;
+    min-width: 0;
+
+    padding: 5px 2px;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    text-align: center;
+
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+
+/* ==========================================
+   ÚLTIMO PASO 07 CENTRADO
+========================================== */
+
+.proceso .step:last-of-type {
+    grid-column: 3 / 5;
+}
+
+
+/* ==========================================
+   NÚMEROS 01 - 07
+========================================== */
+
+.proceso .step-number {
+    position: static;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 14px;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* ==========================================
+   CÍRCULO DE LOS ICONOS
+========================================== */
+
+.proceso .step-icon {
+    position: static;
+
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 12px;
+
+    transform: none;
+}
+
+
+/* ICONO INTERIOR */
+
+.proceso .step-icon i {
+    font-size: 28px;
+}
+
+
+/* ==========================================
+   TEXTO DE CADA PASO
+========================================== */
+
+.proceso .step-content {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    margin: 0;
+}
+
+
+/* TÍTULO */
+
+.proceso .step-content strong {
+    display: block;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    margin-bottom: 3px;
+}
+
+
+/* SUBTÍTULO */
+
+.proceso .step-content span {
+    display: block;
+
+    font-size: 11px;
+
+    line-height: 1.25;
+}
+
+
+/* ==========================================
+   QUITAMOS LAS FLECHAS EN CELULAR
+========================================== */
+
+.proceso .step-arrow {
+    display: none;
+}
 
 
     /* ==========================================
@@ -3775,4 +3944,341 @@ html {
         gap: 12px;
         text-align: center;
     }
+}
+
+/* =========================================
+   DROPDOWN DE SERVICIOS
+========================================= */
+
+.nav-services {
+    position: relative;
+}
+
+/* Caja desplegable */
+.services-dropdown {
+    position: absolute;
+    top: calc(100% + 15px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+
+    width: 390px;
+    padding: 18px;
+
+    background: #ffffff;
+    border-radius: 14px;
+
+    box-shadow: 0 15px 40px rgba(0, 35, 90, 0.18);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+
+    z-index: 2000;
+}
+
+/* Evita que se cierre al mover el mouse
+   desde "Servicios" hacia la caja */
+.services-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+}
+
+/* Mostrar dropdown */
+.nav-services:hover .services-dropdown,
+.nav-services:focus-within .services-dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Cada servicio */
+.services-dropdown .dropdown-service {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    width: 100%;
+    padding: 14px 12px;
+
+    color: #07336f;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+
+    text-decoration: none;
+    border-radius: 10px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.services-dropdown .dropdown-service:hover {
+    background: #f5f7ff;
+    transform: translateX(4px);
+}
+
+/* Íconos */
+
+.dropdown-icon {
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: white;
+    font-size: 18px;
+}
+
+.icon-masivos {
+    background: #08b9bd;
+}
+
+.icon-rpo {
+    background: #6545f6;
+}
+
+.icon-busqueda {
+    background: #079bd3;
+}
+
+/* =========================
+   BOTÓN CONEXA
+========================= */
+
+.btn-conexa {
+    background: #00c2c7;
+    color: #ffffff;
+    border: 2px solid #00c2c7;
+
+    padding: 14px 28px;
+    border-radius: 6px;
+
+    font-weight: 700;
+    text-decoration: none;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    transition: all 0.3s ease;
+}
+
+.btn-conexa:hover {
+    background: #ffffff;
+    color: #0d3b78;
+    border-color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   IGUALAR SUBTÍTULOS DE TODAS LAS SECCIONES
+========================================== */
+
+.solutions-label,
+.section-tag,
+.challenges-label,
+.clients-label {
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+    line-height: 1.2 !important;
+    text-transform: uppercase;
+}
+
+/* ==========================================
+   ANIMACIÓN AL HACER SCROLL
+========================================== */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(45px);
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Tarjetas escalonadas */
+.solution-card.reveal:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.solution-card.reveal:nth-child(2) {
+    transition-delay: 0.3s;
+}
+
+.solution-card.reveal:nth-child(3) {
+    transition-delay: 0.5s;
+}
+
+/* ==========================================
+   ANIMACIÓN PORTADA
+========================================== */
+
+.hero-content.reveal {
+    transform: translateY(35px);
+    transition-delay: 0.1s;
+}
+
+.hero-buttons.reveal {
+    transform: translateY(25px);
+    transition-delay: 0.3s;
+}
+
+
+/* ==========================================
+   INDICADORES DE LA PORTADA
+   aparecen uno por uno
+========================================== */
+
+.stat-item.reveal:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.stat-item.reveal:nth-child(2) {
+    transition-delay: 0.25s;
+}
+
+.stat-item.reveal:nth-child(3) {
+    transition-delay: 0.4s;
+}
+
+.stat-item.reveal:nth-child(4) {
+    transition-delay: 0.55s;
+}
+
+/* ==========================================
+   FOOTER RESPONSIVE - CELULAR
+========================================== */
+
+@media (max-width: 768px) {
+
+    /* Footer general */
+    footer,
+    .footer {
+        width: 100%;
+        padding: 35px 22px 0;
+        box-sizing: border-box;
+    }
+
+    /* Contenedor principal */
+    .footer-container,
+    .footer-content {
+        width: 100%;
+        max-width: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px 25px;
+
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    /* La parte del logo ocupa las 2 columnas */
+    .footer-brand,
+    .footer-info {
+        grid-column: 1 / -1;
+    }
+
+    /* Logo */
+    .footer-logo,
+    .footer-brand img {
+        width: 155px;
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+    }
+
+    /* Descripción */
+    .footer-brand p,
+    .footer-info p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin: 0;
+        max-width: 420px;
+    }
+
+    /* Títulos */
+    .footer h3,
+    .footer h4 {
+        font-size: 17px;
+        margin: 0 0 14px;
+    }
+
+    /* Listas */
+    .footer ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .footer li {
+        margin-bottom: 10px;
+    }
+
+    /* Links */
+    .footer a {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    /* Contacto */
+    .footer-contact p {
+        font-size: 13px;
+        margin-bottom: 10px;
+        word-break: break-word;
+    }
+
+    /* Parte inferior */
+    .footer-bottom {
+        margin-top: 30px;
+        padding: 20px 10px;
+
+        text-align: center;
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    .footer-bottom p {
+        margin: 4px 0;
+    }
+}
+
+.footer-brand p,
+.footer-info p {
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.footer li {
+    margin-bottom: 7px;
+}
+
+.footer-container,
+.footer-content {
+    gap: 25px 22px;
 }
