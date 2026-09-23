@@ -1052,61 +1052,104 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    //Sección de servicios
-    const modalServicio = document.getElementById("modal-servicio-detalle");
-    const modalTitulo = document.getElementById("modal-servicio-titulo");
-    const modalIcono = document.getElementById("modal-servicio-icono");
-    const modalContenido = document.getElementById("modal-servicio-contenido");
-    const btnCerrar = document.getElementById("btn-cerrar-modal-servicio");
-    const btnContacto = document.getElementById("modal-servicio-contacto");
+  // ==========================================
+// SECCIÓN DE SERVICIOS - MODAL
+// ==========================================
 
-    // Evento en cada botón "Conoce más"
-    const botonesConocerMas = document.querySelectorAll(".btn-open-service-modal");
+const modalServicio = document.getElementById("modal-servicio-detalle");
+const modalTitulo = document.getElementById("modal-servicio-titulo");
+const modalIcono = document.getElementById("modal-servicio-icono");
+const modalContenido = document.getElementById("modal-servicio-contenido");
+const btnCerrar = document.getElementById("btn-cerrar-modal-servicio");
+const btnContacto = document.getElementById("modal-servicio-contacto");
 
-    botonesConocerMas.forEach((boton) => {
-        boton.addEventListener("click", () => {
-            const tarjeta = boton.closest(".solution-card");
-            if (!tarjeta) return;
+const botonesConocerMas =
+    document.querySelectorAll(".btn-open-service-modal");
 
-            // Extraer datos de la tarjeta actual
-            const titulo = tarjeta.querySelector("h3")?.innerHTML || "Servicio";
-            const iconoHTML = tarjeta.querySelector(".solution-icon")?.innerHTML || "";
-            const iconoClases = tarjeta.querySelector(".solution-icon")?.className || "solution-icon";
-            const plantilla = tarjeta.querySelector(".service-details-data");
 
-            // Cargar datos en el modal
-            if (modalTitulo) modalTitulo.innerHTML = titulo;
-            if (modalIcono) {
-                modalIcono.className = iconoClases;
-                modalIcono.innerHTML = iconoHTML;
-            }
-            if (modalContenido && plantilla) {
-                modalContenido.innerHTML = plantilla.innerHTML;
-            }
 
-            
 
-            // Mostrar Modal
-            if (modalServicio) modalServicio.classList.add("active");
-        });
+// ABRIR MODAL
+botonesConocerMas.forEach((boton) => {
+
+    boton.addEventListener("click", (e) => {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const tarjeta = boton.closest(".solution-card");
+
+        if (!tarjeta) return;
+
+
+        // Obtener información DE LA TARJETA PRESIONADA
+        const titulo =
+            tarjeta.querySelector("h3")?.innerHTML || "Servicio";
+
+        const icono =
+            tarjeta.querySelector(".solution-icon");
+
+        const plantilla =
+            tarjeta.querySelector(".service-details-data");
+
+
+        // Cargar información
+        if (modalTitulo) {
+            modalTitulo.innerHTML = titulo;
+        }
+
+        if (modalIcono && icono) {
+            modalIcono.className = icono.className;
+            modalIcono.innerHTML = icono.innerHTML;
+        }
+
+        if (modalContenido && plantilla) {
+            modalContenido.innerHTML = plantilla.innerHTML;
+        }
+
+
+        // Abrir modal exactamente sobre la pantalla actual
+if (modalServicio) {
+    modalServicio.classList.add("active");
+}
+
     });
 
-    // Función para cerrar el modal
-    function cerrarModalServicio() {
-        if (modalServicio) modalServicio.classList.remove("active");
-    }
+});
 
-    if (btnCerrar) btnCerrar.addEventListener("click", cerrarModalServicio);
-    if (btnContacto) btnContacto.addEventListener("click", cerrarModalServicio);
 
-    // Cerrar al hacer clic en el fondo oscuro
+function cerrarModalServicio() {
+
     if (modalServicio) {
-        modalServicio.addEventListener("click", (e) => {
-            if (e.target === modalServicio) {
-                cerrarModalServicio();
-            }
-        });
+        modalServicio.classList.remove("active");
     }
+
+}
+
+
+// Cerrar con X
+if (btnCerrar) {
+    btnCerrar.addEventListener("click", cerrarModalServicio);
+}
+
+
+// Botón del modal
+if (btnContacto) {
+    btnContacto.addEventListener("click", cerrarModalServicio);
+}
+
+
+// Cerrar tocando el fondo
+if (modalServicio) {
+
+    modalServicio.addEventListener("click", (e) => {
+
+        if (e.target === modalServicio) {
+            cerrarModalServicio();
+        }
+
+    });
+}
 
 });
 

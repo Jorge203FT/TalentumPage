@@ -4340,3 +4340,154 @@ html {
     }
 
 }
+
+/* ==========================================
+   MODAL SERVICIOS - SOLO CELULAR
+========================================== */
+
+@media (max-width: 640px) {
+
+    /* OVERLAY */
+    #modal-servicio-detalle {
+        position: fixed !important;
+
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+
+        margin: 0 !important;
+        padding: 16px !important;
+
+        box-sizing: border-box !important;
+
+        /* CENTRAR LA CAJA */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        /* CERRADO */
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+
+        overflow: hidden !important;
+
+        z-index: 2147483647 !important;
+
+        transform: none !important;
+    }
+
+
+    /* MODAL ABIERTO */
+    #modal-servicio-detalle.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+
+        top: 0 !important;
+        left: 0 !important;
+
+        transform: none !important;
+    }
+
+
+    /* CAJA BLANCA */
+    #modal-servicio-detalle .modal-card {
+        position: relative !important;
+
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+
+        width: 100% !important;
+        max-width: 400px !important;
+
+        max-height: calc(100dvh - 32px) !important;
+
+        margin: 0 !important;
+        padding: 24px 20px 20px !important;
+
+        box-sizing: border-box !important;
+
+        transform: none !important;
+
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+
+        border-radius: 20px !important;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+
+    /* QUITAR CUALQUIER ANIMACIÓN DE PC */
+    #modal-servicio-detalle.active .modal-card {
+        transform: none !important;
+        top: auto !important;
+    }
+
+
+    /* TÍTULO */
+    #modal-servicio-titulo {
+        font-size: 21px !important;
+        line-height: 1.15 !important;
+
+        text-align: center !important;
+
+        margin: 8px 35px 10px !important;
+    }
+
+
+    /* CONTENIDO */
+    #modal-servicio-contenido {
+        font-size: 13px !important;
+        line-height: 1.35 !important;
+    }
+
+
+    #modal-servicio-contenido .details-section {
+        margin-bottom: 10px !important;
+    }
+
+
+    #modal-servicio-contenido .details-section h4 {
+        margin-top: 5px !important;
+        margin-bottom: 8px !important;
+    }
+
+
+    #modal-servicio-contenido .details-list {
+        gap: 5px !important;
+        margin-bottom: 8px !important;
+    }
+
+
+    #modal-servicio-contenido .details-list li {
+        font-size: 13px !important;
+        line-height: 1.3 !important;
+    }
+
+
+    /* BOTÓN X */
+    #btn-cerrar-modal-servicio {
+        position: absolute !important;
+
+        top: 12px !important;
+        right: 12px !important;
+
+        z-index: 10 !important;
+    }
+
+
+    /* BOTÓN SOLICITAR PROPUESTA */
+    #modal-servicio-contacto {
+        width: 100% !important;
+        margin-top: 10px !important;
+    }
+}
