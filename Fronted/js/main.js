@@ -167,6 +167,7 @@ navLinks.forEach((link) => {
     =========================================== */
 
     const counters = document.querySelectorAll(".counter");
+    const repeat_interval = 8000;
 
 function animateCounter(counter) {
 
@@ -213,6 +214,17 @@ function animateCounter(counter) {
 
     requestAnimationFrame(updateCounter);
 }
+
+// Función que dispara la animación en todas las métricas a la vez
+function startAllCounters() {
+    counters.forEach(counter => animateCounter(counter));
+}
+
+// 1. Ejecuta la animación por primera vez
+startAllCounters();
+
+// 2. Repite la animación en bucle continuo
+setInterval(startAllCounters, repeat_interval);
 
 
 /* Detectar cuando los números aparecen en pantalla */
@@ -926,7 +938,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 mostrarModal({
                     titulo: "¡Registro Exitoso!",
-                    mensaje: "Tu hoja de vida ha sido registrada correctamente en nuestra bolsa de trabajo.",
+                    mensaje: `Gracias <b>${nombre}</b>, tu hoja de vida ha sido registrada correctamente en nuestra bolsa de trabajo. Accede a nuestra plataforma de empleo y encuentra nuevas oportunidades`,
                     tipo: "success"
                 });
 
@@ -1032,7 +1044,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 mostrarModal({
                     titulo: "¡Solicitud Enviada!",
-                    mensaje: "Hemos recibido tu información correctamente. Nos pondremos en contacto muy pronto.",
+                    mensaje: `Hemos recibido la solicitud de <b>${empresa}</b>. Un asesor comercial se pondrá en contacto al correo <b>${correo}</b>.`,
                     tipo: "success"
                 });
 
