@@ -162,23 +162,25 @@ navLinks.forEach((link) => {
 
 
 
-    /* ==========================================
-       CONTADORES ANIMADOS - MÉTRICAS
-    =========================================== */
+   /* ==========================================
+   CONTADORES ANIMADOS - MÉTRICAS
+=========================================== */
 
-    const counters = document.querySelectorAll(".counter");
-    const repeat_interval = 8000;
+const counters = document.querySelectorAll(".counter");
 
+/* Animar contador desde 0 */
 function animateCounter(counter) {
 
     const target = Number(counter.dataset.target);
     const prefix = counter.dataset.prefix || "";
     const suffix = counter.dataset.suffix || "";
 
-    const duration = 900;
-    const startValue = 0;
+    const duration = 1000;
 
     let startTime = null;
+
+    /* Evita ejecutar dos animaciones al mismo tiempo */
+    counter.dataset.animating = "true";
 
     function updateCounter(currentTime) {
 
@@ -191,10 +193,12 @@ function animateCounter(counter) {
             1
         );
 
-        const easeOut = 1 - Math.pow(1 - progress, 3);
+        /* Movimiento suave */
+        const easeOut =
+            1 - Math.pow(1 - progress, 3);
 
         const currentValue = Math.floor(
-            startValue + (target - startValue) * easeOut
+            target * easeOut
         );
 
         counter.textContent =
@@ -203,43 +207,62 @@ function animateCounter(counter) {
             suffix;
 
         if (progress < 1) {
+
             requestAnimationFrame(updateCounter);
+
         } else {
+
             counter.textContent =
                 prefix +
                 target.toLocaleString("en-US") +
                 suffix;
+
+            counter.dataset.animating = "false";
         }
     }
 
     requestAnimationFrame(updateCounter);
 }
 
-// Función que dispara la animación en todas las métricas a la vez
-function startAllCounters() {
-    counters.forEach(counter => animateCounter(counter));
+
+/* Reiniciar contador en 0 */
+function resetCounter(counter) {
+
+    const prefix = counter.dataset.prefix || "";
+    const suffix = counter.dataset.suffix || "";
+
+    counter.textContent =
+        prefix + "0" + suffix;
+
+    counter.dataset.animating = "false";
 }
 
-// 1. Ejecuta la animación por primera vez
-startAllCounters();
 
-// 2. Repite la animación en bucle continuo
-setInterval(startAllCounters, repeat_interval);
-
-
-/* Detectar cuando los números aparecen en pantalla */
+/* ==========================================
+   DETECTAR ENTRADA / SALIDA DE PANTALLA
+=========================================== */
 
 const counterObserver = new IntersectionObserver(
-    (entries, observer) => {
+    (entries) => {
 
         entries.forEach((entry) => {
 
+            /* Cuando aparece */
             if (entry.isIntersecting) {
 
-                animateCounter(entry.target);
+                if (
+                    entry.target.dataset.animating !== "true"
+                ) {
+                    animateCounter(entry.target);
+                }
 
-                // Se ejecuta una sola vez
-                observer.unobserve(entry.target);
+            }
+
+            /* Cuando desaparece */
+            else {
+
+                resetCounter(entry.target);
+
             }
 
         });
@@ -251,292 +274,235 @@ const counterObserver = new IntersectionObserver(
 );
 
 
-/* Dejarlos en 0 hasta que aparezcan */
+/* ==========================================
+   INICIALIZAR CONTADORES
+=========================================== */
 
 counters.forEach((counter) => {
 
-    const prefix = counter.dataset.prefix || "";
-    const suffix = counter.dataset.suffix || "";
-
-    counter.textContent = prefix + "0" + suffix;
+    resetCounter(counter);
 
     counterObserver.observe(counter);
+
 });
 
 
     /* ==========================================
-       CARRUSEL DE EMPRESAS / LOGOS
+   CARRUSEL DE EMPRESAS / LOGOS
+=========================================== */
+
+const track = document.getElementById("carouselTrack");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const wrapper = document.querySelector(".carousel-wrapper");
+const carouselContainer = document.querySelector(".carousel-container");
+
+if (
+    track &&
+    prevBtn &&
+    nextBtn &&
+    wrapper &&
+    carouselContainer
+) {
+
+    const slides = Array.from(track.children);
+
+    let currentIndex = 0;
+    let autoPlayTimer = null;
+    let resizeTimer = null;
+
+
+    /* ==========================================
+       LOGOS VISIBLES SEGÚN PANTALLA
     =========================================== */
 
-    const track =
-        document.getElementById("carouselTrack");
+    function getVisibleSlides() {
 
-    const prevBtn =
-        document.getElementById("prevBtn");
+        const width = window.innerWidth;
 
-    const nextBtn =
-        document.getElementById("nextBtn");
-
-    const wrapper =
-        document.querySelector(".carousel-wrapper");
-
-
-    /*
-       Solo ejecutamos el carrusel
-       si los elementos existen.
-    */
-
-    if (track && prevBtn && nextBtn && wrapper) {
-
-        const slides =
-            Array.from(track.children);
-
-        let currentIndex = 0;
-
-        let autoPlayTimer = null;
-
-
-
-        /* ==========================================
-           LOGOS VISIBLES SEGÚN PANTALLA
-        =========================================== */
-
-        function getVisibleSlides() {
-
-            if (window.innerWidth <= 600) {
-
-                return 2;
-
-            }
-
-            if (window.innerWidth <= 900) {
-
-                return 3;
-
-            }
-
-            return 4;
-
+        if (width <= 600) {
+            return 2;
         }
 
-
-
-        /* ==========================================
-           ACTUALIZAR CARRUSEL
-        =========================================== */
-
-        function updateCarousel() {
-
-            const visibleSlides =
-                getVisibleSlides();
-
-            const maxIndex =
-                Math.max(
-                    slides.length - visibleSlides,
-                    0
-                );
-
-
-            if (currentIndex > maxIndex) {
-
-                currentIndex = 0;
-
-            }
-
-
-            if (currentIndex < 0) {
-
-                currentIndex = maxIndex;
-
-            }
-
-
-            if (slides.length === 0) {
-
-                return;
-
-            }
-
-
-            const slideWidth =
-                slides[0]
-                    .getBoundingClientRect()
-                    .width;
-
-
-            track.style.transform =
-
-                `translateX(-${
-                    currentIndex * slideWidth
-                }px)`;
-
+        if (width <= 900) {
+            return 3;
         }
 
-
-
-        /* ==========================================
-           SIGUIENTE
-        =========================================== */
-
-        function nextSlide() {
-
-            const visibleSlides =
-                getVisibleSlides();
-
-            const maxIndex =
-                Math.max(
-                    slides.length - visibleSlides,
-                    0
-                );
-
-
-            currentIndex =
-
-                currentIndex >= maxIndex
-
-                    ? 0
-
-                    : currentIndex + 1;
-
-
-            updateCarousel();
-
-        }
-
-
-
-        /* ==========================================
-           ANTERIOR
-        =========================================== */
-
-        function prevSlide() {
-
-            const visibleSlides =
-                getVisibleSlides();
-
-            const maxIndex =
-                Math.max(
-                    slides.length - visibleSlides,
-                    0
-                );
-
-
-            currentIndex =
-
-                currentIndex <= 0
-
-                    ? maxIndex
-
-                    : currentIndex - 1;
-
-
-            updateCarousel();
-
-        }
-
-
-
-        /* ==========================================
-           AUTOPLAY
-        =========================================== */
-
-        function startAutoPlay() {
-
-            stopAutoPlay();
-
-            autoPlayTimer =
-                setInterval(
-                    nextSlide,
-                    3500
-                );
-
-        }
-
-
-        function stopAutoPlay() {
-
-            if (autoPlayTimer) {
-
-                clearInterval(
-                    autoPlayTimer
-                );
-
-                autoPlayTimer = null;
-
-            }
-
-        }
-
-
-
-        /* ==========================================
-           BOTONES
-        =========================================== */
-
-        nextBtn.addEventListener(
-            "click",
-            () => {
-
-                nextSlide();
-
-                startAutoPlay();
-
-            }
-        );
-
-
-        prevBtn.addEventListener(
-            "click",
-            () => {
-
-                prevSlide();
-
-                startAutoPlay();
-
-            }
-        );
-
-
-
-        /* ==========================================
-           PAUSAR CON EL MOUSE
-        =========================================== */
-
-        wrapper.addEventListener(
-            "mouseenter",
-            stopAutoPlay
-        );
-
-
-        wrapper.addEventListener(
-            "mouseleave",
-            startAutoPlay
-        );
-
-
-
-        /* ==========================================
-           RESPONSIVE
-        =========================================== */
-
-        window.addEventListener(
-            "resize",
-            updateCarousel
-        );
-
-
-
-        /* ==========================================
-           INICIAR CARRUSEL
-        =========================================== */
-
-        updateCarousel();
-
-        startAutoPlay();
-
+        return 4;
     }
 
- 
+
+    /* ==========================================
+       ACTUALIZAR CARRUSEL
+    =========================================== */
+
+    function updateCarousel() {
+
+        if (slides.length === 0) {
+            return;
+        }
+
+        const visibleSlides = getVisibleSlides();
+
+        const maxIndex = Math.max(
+            slides.length - visibleSlides,
+            0
+        );
+
+        /* Evitar índices inválidos al cambiar
+           de monitor, tablet o celular */
+        if (currentIndex > maxIndex) {
+            currentIndex = maxIndex;
+        }
+
+        if (currentIndex < 0) {
+            currentIndex = 0;
+        }
+
+        /* Calculamos el ancho utilizando
+           el contenedor visible real */
+        const containerWidth =
+            carouselContainer.clientWidth;
+
+        const slideWidth =
+            containerWidth / visibleSlides;
+
+        track.style.transform =
+            `translate3d(-${currentIndex * slideWidth}px, 0, 0)`;
+    }
+
+
+    /* ==========================================
+       SIGUIENTE
+    =========================================== */
+
+    function nextSlide() {
+
+        const visibleSlides = getVisibleSlides();
+
+        const maxIndex = Math.max(
+            slides.length - visibleSlides,
+            0
+        );
+
+        currentIndex =
+            currentIndex >= maxIndex
+                ? 0
+                : currentIndex + 1;
+
+        updateCarousel();
+    }
+
+
+    /* ==========================================
+       ANTERIOR
+    =========================================== */
+
+    function prevSlide() {
+
+        const visibleSlides = getVisibleSlides();
+
+        const maxIndex = Math.max(
+            slides.length - visibleSlides,
+            0
+        );
+
+        currentIndex =
+            currentIndex <= 0
+                ? maxIndex
+                : currentIndex - 1;
+
+        updateCarousel();
+    }
+
+
+    /* ==========================================
+       AUTOPLAY
+    =========================================== */
+
+    function startAutoPlay() {
+
+        stopAutoPlay();
+
+        autoPlayTimer = setInterval(
+            nextSlide,
+            3500
+        );
+    }
+
+
+    function stopAutoPlay() {
+
+        if (autoPlayTimer) {
+
+            clearInterval(autoPlayTimer);
+
+            autoPlayTimer = null;
+        }
+    }
+
+
+    /* ==========================================
+       BOTONES
+    =========================================== */
+
+    nextBtn.addEventListener("click", () => {
+
+        nextSlide();
+        startAutoPlay();
+
+    });
+
+
+    prevBtn.addEventListener("click", () => {
+
+        prevSlide();
+        startAutoPlay();
+
+    });
+
+
+    /* ==========================================
+       PAUSAR CON MOUSE
+    =========================================== */
+
+    wrapper.addEventListener(
+        "mouseenter",
+        stopAutoPlay
+    );
+
+
+    wrapper.addEventListener(
+        "mouseleave",
+        startAutoPlay
+    );
+
+
+    /* ==========================================
+       RESPONSIVE
+    =========================================== */
+
+    window.addEventListener("resize", () => {
+
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(() => {
+
+            updateCarousel();
+
+        }, 100);
+
+    });
+
+
+    /* ==========================================
+       INICIAR
+    =========================================== */
+
+    updateCarousel();
+    startAutoPlay();
+}
+
 
 });
 
@@ -1293,3 +1259,4 @@ document.addEventListener("mouseout", (e) => {
 document.addEventListener("mouseleave", () => {
     purpleCursor.classList.add("hidden");
 });
+
