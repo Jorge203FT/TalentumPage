@@ -375,6 +375,367 @@ html {
 }
 
 
+/* ==========================================
+   HERO RESPONSIVE - LAPTOP Y MONITOR
+   MISMA COMPOSICIÓN EN ESCRITORIO
+========================================== */
+
+@media (min-width: 1025px) {
+
+    .hero {
+        width: 100%;
+
+        /* Mantiene una altura similar en laptop y monitor */
+        min-height: 580px;
+        height: clamp(580px, 38vw, 720px);
+
+        display: grid;
+
+        /* Proporción de la captura de referencia */
+        grid-template-columns: 52% 48%;
+
+        position: relative;
+
+        background: #0b3270;
+
+        overflow: hidden;
+    }
+
+
+    /* =========================
+       CONTENIDO IZQUIERDO
+    ========================= */
+
+    .hero-content {
+        position: relative;
+
+        z-index: 5;
+
+        width: 100%;
+        min-width: 0;
+        height: 100%;
+
+        box-sizing: border-box;
+
+        padding:
+            clamp(45px, 3.5vw, 70px)
+            clamp(60px, 5vw, 100px);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        background: #0b3270;
+    }
+
+
+    /* =========================
+       TÍTULO
+    ========================= */
+
+    .hero h1 {
+        position: relative;
+
+        z-index: 6;
+
+        width: 100%;
+        max-width: 650px;
+
+        margin: 0 0 28px 0;
+
+        color: #ffffff;
+
+        font-size: clamp(48px, 3.2vw, 62px);
+
+        line-height: 1.06;
+    }
+
+
+    .hero h1 span {
+        color: #13c5c4;
+    }
+
+
+    /* =========================
+       DESCRIPCIÓN
+    ========================= */
+
+    .hero p {
+        position: relative;
+
+        z-index: 6;
+
+        width: 100%;
+        max-width: 620px;
+
+        margin: 0;
+
+        color: #ffffff;
+
+        font-size: clamp(15px, 1vw, 18px);
+
+        line-height: 1.6;
+
+        opacity: 0.9;
+    }
+
+
+    /* =========================
+       BOTONES
+    ========================= */
+
+    .hero-buttons {
+        position: relative;
+
+        z-index: 6;
+
+        display: flex;
+
+        flex-direction: row;
+
+        flex-wrap: nowrap;
+
+        align-items: center;
+
+        width: 100%;
+
+        max-width: 570px;
+
+        gap: clamp(12px, 1vw, 20px);
+
+        /*
+           Posición similar a tu primera captura
+        */
+        margin-top: 30px;
+    }
+
+
+    .hero-buttons .btn {
+        flex: 1 1 0;
+
+        min-width: 0;
+
+        padding: 16px 14px;
+
+        font-size: clamp(13px, 0.85vw, 15px);
+
+        white-space: nowrap;
+
+        text-align: center;
+    }
+
+
+    .hero-buttons .btn:nth-child(3) {
+        margin: 0;
+    }
+
+
+    /* =========================
+       IMAGEN DERECHA
+    ========================= */
+
+    .hero-image {
+        position: relative;
+
+        width: 100%;
+
+        height: 100%;
+
+        min-height: 580px;
+
+        overflow: hidden;
+    }
+
+
+    .hero-image img {
+        display: block;
+
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: cover;
+
+        object-position: center center;
+    }
+
+
+    /* =========================
+       DEGRADADO
+    ========================= */
+
+    .hero-image::before {
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+
+        bottom: 0;
+
+        left: 0;
+
+        width: 42%;
+
+        z-index: 2;
+
+        pointer-events: none;
+
+        background: linear-gradient(
+            to right,
+
+            #0b3270 0%,
+
+            rgba(11, 50, 112, 0.98) 8%,
+
+            rgba(11, 50, 112, 0.90) 20%,
+
+            rgba(11, 50, 112, 0.70) 38%,
+
+            rgba(11, 50, 112, 0.45) 56%,
+
+            rgba(11, 50, 112, 0.22) 72%,
+
+            rgba(11, 50, 112, 0.08) 86%,
+
+            rgba(11, 50, 112, 0) 100%
+        );
+    }
+}
+
+
+/* ==========================================
+   LAPTOPS MÁS PEQUEÑAS
+========================================== */
+
+@media (min-width: 1025px) and (max-width: 1400px) {
+
+    .hero {
+        min-height: 570px;
+        height: 570px;
+
+        grid-template-columns: 52% 48%;
+    }
+
+
+    .hero-content {
+        padding-left: clamp(55px, 5vw, 75px);
+
+        padding-right: 40px;
+    }
+
+
+    .hero h1 {
+        max-width: 590px;
+
+        font-size: clamp(45px, 4vw, 56px);
+    }
+
+
+    .hero p {
+        max-width: 580px;
+
+        font-size: 15px;
+    }
+
+
+    .hero-buttons {
+        max-width: 550px;
+
+        margin-top: 28px;
+    }
+
+
+    .hero-image {
+        min-height: 570px;
+    }
+}
+
+
+/* ==========================================
+   MONITORES GRANDES
+========================================== */
+
+@media (min-width: 1800px) {
+
+    .hero {
+        height: 650px;
+
+        min-height: 650px;
+
+        grid-template-columns: 52% 48%;
+    }
+
+
+    .hero-content {
+        padding-left: 100px;
+
+        padding-right: 70px;
+    }
+
+
+    .hero h1 {
+        max-width: 650px;
+
+        font-size: 62px;
+    }
+
+
+    .hero p {
+        max-width: 620px;
+
+        font-size: 18px;
+    }
+
+
+    .hero-buttons {
+        max-width: 570px;
+
+        margin-top: 30px;
+    }
+
+
+    .hero-image {
+        min-height: 650px;
+    }
+}
+
+
+/* ==========================================
+   AJUSTE PARA MONITORES GRANDES
+========================================== */
+
+@media (min-width: 1800px) {
+
+    .hero {
+        grid-template-columns: 52% 48%;
+    }
+
+    .hero-content {
+        padding-left: 105px;
+        padding-right: 80px;
+    }
+
+    .hero h1 {
+        max-width: 650px;
+        font-size: 62px;
+    }
+
+    .hero p {
+        max-width: 620px;
+        font-size: 18px;
+    }
+
+    .hero-buttons {
+        max-width: 570px;
+    }
+
+    .hero-buttons .btn {
+        font-size: 15px;
+    }
+}
+
+
 /* =========================
    MÉTRICAS
 ========================= */
